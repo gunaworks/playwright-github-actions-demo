@@ -4,9 +4,11 @@
   "description": "test automation for lokalise with playwright",
   "private": true,
   "devDependencies": {
+    "@types/faker": "^5.5.3",
     "@playwright/test": "^1.14.1"
   },
   "dependencies": {
+    "faker": "^5.5.3",
     "playwright": "^1.14.1"
   }
 }
