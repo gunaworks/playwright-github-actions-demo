@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
+import {SignupPage} from "../pages/signup-page";
 
-test('First sample test', async ({ page }) => {
-    await page.goto('/projects');
-    const title = page.locator('title');
-    await expect(title).toContainText('Lokalise');
+test('User sign up test', async ({ page }) => {
+    let signupPage = new SignupPage(page);
+    await signupPage.goto('/projects');
+    await signupPage.signup();
 });

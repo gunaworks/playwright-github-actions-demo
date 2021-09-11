@@ -1,5 +1,6 @@
 import type {Page} from 'playwright';
 import {BasePage} from './base-page';
+import {expect} from "@playwright/test";
 
 const faker = require('faker')
 const locators = {
@@ -29,7 +30,7 @@ export class SignupPage extends BasePage {
         console.log("Clicking signup");
         await this.clickSignUp();
         await this.signUpInitialForm();
-        await this.signUpFinalForm();
+        await this.completeSignUp();
     }
 
     private async clickSignUp() {
@@ -37,6 +38,7 @@ export class SignupPage extends BasePage {
         await this.click(locators.signUp);
         await this.waitForElement(locators.signUpForm1);
         await this.waitForUrl('/signup');
+        expect(this.page.url()).toContain('/signup')
     }
 
     private async signUpInitialForm() {
@@ -47,23 +49,19 @@ export class SignupPage extends BasePage {
             faker.lorem.word() + '.com'));
         await this.type(locators.passwordInForm, faker.internet.password());
         await this.click(locators.signUpButton)
-        await this.waitForUrl('/welcome');
         await this.waitForElement(locators.signUpForm2);
+        await this.waitForUrl('/welcome');
+        expect(this.page.url()).toContain('/welcome')
     }
 
-    private async signUpFinalForm() {
-        await this.selectOptionInDropdown(locators.role, '2'); //TODO randomize the option from the drop down
+    private async completeSignUp() { //TODO randomize the option from the drop down
+        await this.selectOptionInDropdown(locators.role, '2');
         await this.type(locators.companyName, faker.company.companyName());
         await this.selectOptionInDropdown(locators.companySize, '2');
         await this.type(locators.phoneNumber, faker.phone.phoneNumber());
         await this.selectOptionInDropdown(locators.aboutLokalise, '2');
         await this.click(locators.completeSignUpButton);
-        await this.waitForUrl('/projects')
+        await this.waitForUrl('/projects');
+        expect(this.page.url()).toContain('/projects')
     }
-
-    // async login() {
-    //     await this.urlContainsText('login');
-    //     await this.type(this.emailAddress, "asdf@asdf.com");
-    //     await this.type(this.password, "asdf");
-    // }
 }
