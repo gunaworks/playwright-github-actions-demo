@@ -7,32 +7,28 @@ export class BasePage {
         this.page = page;
     }
 
-    async navigateTo(url: string){
+    navigateTo = async (url: string) => {
         await this.page.goto(url);
-    }
+    };
 
-    public async click(selector: string) {
-        return this.page.click(selector);
-    }
+    protected click = async (selector: string) => this.page.click(selector);
 
     type = async (selector: string, keys: string) => {
         await this.page.type(selector, keys);
     };
 
-    async waitForUrl(url) {
-        return expect(await this.page.waitForURL(url));
-    }
+    waitForUrl = async url => expect(await this.page.waitForURL(url));
 
-    async waitForElement(selector) {
+    waitForElement = async selector => {
         await this.page.waitForSelector(selector);
         await expect(this.page.locator(selector)).toBeVisible();
-    }
+    };
 
-    async urlContainsText(link: string){
+    urlContainsText = async (link: string) => {
         expect(this.page.url().includes(link)).toBeTruthy();
-    }
+    };
 
-    async selectOptionInDropdown(selector: string, option: string){
+    selectOptionInDropdown = async (selector: string, option: string) => {
         await this.page.selectOption(selector, option);
-    }
+    };
 }

@@ -4,7 +4,7 @@ const config: PlaywrightTestConfig = {
     use: {
         baseURL: 'https://stage.lokalise.com',
         browserName: 'firefox',
-        headless: false,
+        headless: true,
     },
 
     projects: [

@@ -23,12 +23,12 @@ export class ProjectsPage extends BasePage {
         await this.enterProjectDetails();
     };
 
-    createNewProject = async () => {
+    private createNewProject = async () => {
         await this.click(locators.newProjectButton);
         await this.waitForElement(locators.addProjectOverlay);
     };
 
-    enterProjectDetails = async () => {
+    private enterProjectDetails = async () => {
         let projectName = 'Project '+randomString();
         await this.type(locators.projectName, projectName);
         await this.click(locators.createProject);

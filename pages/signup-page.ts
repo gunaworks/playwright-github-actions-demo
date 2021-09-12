@@ -1,13 +1,12 @@
-import type {Page} from 'playwright';
+import type {Page} from '@playwright/test';
 import {BasePage} from './base-page';
 import {expect} from "@playwright/test";
 
-// export const randomPassword = () => `!0${randomString()}`;
-// export const randomEmail = () => `test-user-${randomString()}@lokalise.com`;
-
+export const randomPassword = () => `!0${randomString()}`;
+export const randomEmail = () => `test-user-${randomString()}@lokalise.com`;
 export const randomString = () => Math.random().toString(36).substring(2, 15);
-export const randomEmail = () => `franco@fra.org`;
-export const randomPassword = () => `!Abcd1234`;
+// export const randomEmail = () => `franco@fra.org`;
+// export const randomPassword = () => `!Abcd1234`;
 
 const faker = require('faker')
 const locators = {
@@ -31,21 +30,22 @@ export class SignupPage extends BasePage {
         super(page);
     }
 
-    async signup() {
+    signup = async () => {
         await this.clickSignUp();
         await this.signUpInitialForm();
         await this.completeSignUp();
-    }
+    };
 
-    private async clickSignUp() {
-        console.log("Clicking signup");
-        await this.click(locators.signUp);
+    private clickSignUp = async () => {
+        await this.navigateTo('/signup');
+        // await this.waitForElement(locators.signUp);
+        // await this.click(locators.signUp);
         await this.waitForElement(locators.signUpForm1);
         await this.waitForUrl('/signup');
         expect(this.page.url()).toContain('/signup')
-    }
+    };
 
-    private async signUpInitialForm() {
+    private signUpInitialForm = async () => {
         let name = faker.name.firstName();
 
         await this.type(locators.fullName, name);
@@ -55,9 +55,9 @@ export class SignupPage extends BasePage {
         await this.waitForElement(locators.signUpForm2);
         await this.waitForUrl('/welcome');
         expect(this.page.url()).toContain('/welcome')
-    }
+    };
 
-    private async completeSignUp() { //TODO randomize the option from the drop down
+    private completeSignUp = async () => { //TODO randomize the option from the drop down
         let companyName = faker.company.companyName();
         let phoneNumber = faker.phone.phoneNumber();
 
@@ -69,5 +69,5 @@ export class SignupPage extends BasePage {
         await this.click(locators.completeSignUpButton);
         await this.waitForUrl('/projects');
         expect(this.page.url()).toContain('/projects')
-    }
+    };
 }
