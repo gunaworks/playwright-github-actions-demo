@@ -7,17 +7,17 @@ export class BasePage {
         this.page = page;
     }
 
-    async goto(url: string){
+    async navigateTo(url: string){
         await this.page.goto(url);
     }
 
     public async click(selector: string) {
-        return await this.page.click(selector);
+        return this.page.click(selector);
     }
 
-    async type(selector: string, keys: string) {
+    type = async (selector: string, keys: string) => {
         await this.page.type(selector, keys);
-    }
+    };
 
     async waitForUrl(url) {
         return expect(await this.page.waitForURL(url));
@@ -25,6 +25,7 @@ export class BasePage {
 
     async waitForElement(selector) {
         await this.page.waitForSelector(selector);
+        await expect(this.page.locator(selector)).toBeVisible();
     }
 
     async urlContainsText(link: string){
