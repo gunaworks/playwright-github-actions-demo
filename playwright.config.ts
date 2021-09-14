@@ -6,7 +6,7 @@ const config: PlaywrightTestConfig = {
     browserName: "firefox",
     headless: true,
   },
-  reporter: [["dot"], ["json", {outputFile: "test-result.json"}],["allure-playwright"]],
+  reporter: [["allure-playwright"]],
   projects: [
     {
       name: "Chrome browser",
