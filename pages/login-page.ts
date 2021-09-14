@@ -17,11 +17,8 @@ export class LoginPage extends BasePage {
 
   login = async () => {
     await this.navigateTo("/login");
-    await this.type(locators.emailAddress, randomEmail());
-    await this.type(locators.password, randomPassword());
+    await this.type(locators.emailAddress, process.env.EMAIL);
+    await this.type(locators.password, process.env.PASSWORD);
     await this.click(locators.loginButton);
-    await this.waitForElement(locators.userLandingPage);
-    await this.waitForUrl("/projects");
-    expect(this.page.url()).toContain("/projects");
   };
 }
