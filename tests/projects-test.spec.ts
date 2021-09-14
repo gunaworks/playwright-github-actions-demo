@@ -1,6 +1,7 @@
 import { test } from "@playwright/test";
 import { ProjectsPage } from "../pages/projects-page";
 import { LoginPage } from "../pages/login-page";
+import {deleteProjects} from "../utils/project-utils";
 
 test.describe(`Projects test`, () => {
   test.beforeEach(async ({ page }) => {
@@ -13,4 +14,8 @@ test.describe(`Projects test`, () => {
     await projectPage.createProject();
     await projectPage.verifyProjectLandingPage();
   });
+
+  test.afterEach(async() => {
+    await deleteProjects()
+  })
 });
