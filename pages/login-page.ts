@@ -5,7 +5,7 @@ const locators = {
   emailAddress: "div:nth-of-type(1) > .jKLUHq.sc-gXfVKN",
   password: "div:nth-of-type(2) > .jKLUHq.sc-gXfVKN",
   loginButton: ".gCUvUk.sc-hiKfDv",
-  userLandingPage:  '.sc-dlMDgC' //'.jfZxKp.sc-bdnxRM',
+  userLandingPage: ".sc-dlMDgC", //'.jfZxKp.sc-bdnxRM',
   // userLandingPage: ".jfZxKp.sc-bdnxRM", //'.sc-dlMDgC' ,
 };
 

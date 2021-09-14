@@ -17,11 +17,11 @@ export class BasePage {
     await this.page.type(selector, keys);
   };
 
-  waitForUrl = async (url: string | RegExp | ((url: URL) => boolean)) => expect(await this.page.waitForURL(url));
+  waitForUrl = async (url: string | RegExp | ((url: URL) => boolean)) =>
+    expect(await this.page.waitForURL(url));
 
   waitForElement = async (selector: string) => {
     await this.page.waitForSelector(selector);
-    await expect(this.page.locator(selector)).toBeVisible();
   };
 
   urlContainsText = async (link: string) => {
