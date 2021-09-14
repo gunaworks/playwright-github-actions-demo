@@ -1,13 +1,12 @@
 import { BasePage } from "./base-page";
-import { expect, Page } from "@playwright/test";
-import { randomEmail, randomPassword } from "./signup-page";
+import { Page } from "@playwright/test";
 
 const locators = {
   emailAddress: "div:nth-of-type(1) > .jKLUHq.sc-gXfVKN",
   password: "div:nth-of-type(2) > .jKLUHq.sc-gXfVKN",
   loginButton: ".gCUvUk.sc-hiKfDv",
-  // userLandingPage:  '.sc-dlMDgC' //'.jfZxKp.sc-bdnxRM',
-  userLandingPage: ".jfZxKp.sc-bdnxRM", //'.sc-dlMDgC' ,
+  userLandingPage:  '.sc-dlMDgC' //'.jfZxKp.sc-bdnxRM',
+  // userLandingPage: ".jfZxKp.sc-bdnxRM", //'.sc-dlMDgC' ,
 };
 
 export class LoginPage extends BasePage {

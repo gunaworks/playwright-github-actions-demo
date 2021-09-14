@@ -13,13 +13,13 @@ export class BasePage {
 
   protected click = async (selector: string) => this.page.click(selector);
 
-  type = async (selector: string, keys: string) => {
+  type = async (selector: string, keys: any) => {
     await this.page.type(selector, keys);
   };
 
-  waitForUrl = async (url) => expect(await this.page.waitForURL(url));
+  waitForUrl = async (url: string | RegExp | ((url: URL) => boolean)) => expect(await this.page.waitForURL(url));
 
-  waitForElement = async (selector) => {
+  waitForElement = async (selector: string) => {
     await this.page.waitForSelector(selector);
     await expect(this.page.locator(selector)).toBeVisible();
   };
