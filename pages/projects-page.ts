@@ -24,13 +24,17 @@ export class ProjectsPage extends BasePage {
   }
 
   createProject = async () => {
+    await this.validateProjectPage();
     await this.createNewProject();
     await this.enterProjectDetails();
   };
 
-  private createNewProject = async () => {
+  private validateProjectPage = async () => {
     await this.waitForElement(locators.userLandingPage);
     await this.waitForUrl("/projects");
+  };
+
+  private createNewProject = async () => {
     await this.click(locators.newProjectButton);
     await this.waitForElement(locators.addProjectOverlay);
   };
@@ -43,7 +47,23 @@ export class ProjectsPage extends BasePage {
   };
 
   verifyProjectLandingPage = async () => {
-    await this.waitForElement(locators.projectTitle);
     await this.waitForElement(locators.projectsLandingPage);
+    await expect(
+      await this.page.locator(locators.projectsLandingPage)
+    ).toBeVisible();
+  };
+
+  verifyProjectTitle = async () => {
+    await this.waitForElement(locators.projectTitle);
+    await expect(await this.page.locator(locators.projectTitle)).toBeVisible();
+    let textContent = await this.page
+      .locator(locators.projectTitle)
+      .innerText();
+    expect(textContent).toContain(projectName);
+  };
+
+  verifyNumberOfProjectTile = async (count: any) => {
+    await this.waitForElement(locators.projectTile);
+    expect(await this.page.locator(locators.projectTile).count()).toBe(count);
   };
 }
