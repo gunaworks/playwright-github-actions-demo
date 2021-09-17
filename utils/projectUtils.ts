@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 import axios from "../axios";
+import {createProjectRequest} from "./projectTestData";
 
 export const deleteProjects = async () => {
   let projectId = await getProjects();
@@ -9,6 +10,14 @@ export const deleteProjects = async () => {
   });
 };
 
+export const createProject = async () => {
+  const body = createProjectRequest();
+  await axios.post(`projects`, body).then(function (response) {
+      expect(response.status).toBe(200);
+      expect(response.data.project_id).not.toBeNull();
+  });
+
+}
 const getProjects = async () => {
   let response = await axios.get(`projects`).then(function (response) {
     expect(response.status).toBe(200);

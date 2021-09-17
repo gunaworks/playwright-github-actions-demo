@@ -1,4 +1,4 @@
-import { BasePage } from "./base-page";
+import { BasePage } from "./basePage";
 import { expect, Page } from "@playwright/test";
 
 let projectName = "";
@@ -16,6 +16,7 @@ const locators = {
   userLandingPage: ".sc-dlMDgC", //'.jfZxKp.sc-bdnxRM',
   projectTitle: "a.project-title-wrapper",
   projectTile: "//div[@data-rbd-droppable-id='droppable']/div[*]",
+  project: "[data-name='project-name']"
 };
 
 export class ProjectsPage extends BasePage {
@@ -31,7 +32,7 @@ export class ProjectsPage extends BasePage {
 
   private validateProjectPage = async () => {
     await this.waitForElement(locators.userLandingPage);
-    await this.waitForUrl("/projects");
+    await this.navigateTo("/projects");
   };
 
   private createNewProject = async () => {
@@ -45,6 +46,12 @@ export class ProjectsPage extends BasePage {
     await this.waitForElement(locators.createProject);
     await this.click(locators.createProject);
   };
+
+  selectProject = async() => {
+    await this.reloadPage();
+    await this.waitForElement(locators.project);
+    await this.click(locators.project);
+  }
 
   verifyProjectLandingPage = async () => {
     await this.waitForElement(locators.projectsLandingPage);
@@ -62,7 +69,8 @@ export class ProjectsPage extends BasePage {
     expect(textContent).toContain(projectName);
   };
 
-  verifyNumberOfProjectTile = async (count: any) => {
+  verifyNumberOfProjectTileInProjectsPage = async (count: any) => {
+    await this.navigateTo(`/projects`);
     await this.waitForElement(locators.projectTile);
     expect(await this.page.locator(locators.projectTile).count()).toBe(count);
   };

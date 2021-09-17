@@ -1,38 +1,64 @@
-import { test } from "@playwright/test";
-import { ProjectsPage } from "../pages/projects-page";
-import { LoginPage } from "../pages/login-page";
-import { deleteProjects } from "../utils/project-utils";
+import {Page, test} from "@playwright/test";
+import { ProjectsPage } from "../pages/projectsPage";
+import { LoginPage } from "../pages/loginPage";
+import { KeysPage } from "../pages/keysPage";
+import {createProject, deleteProjects} from "../utils/projectUtils";
 
-test.describe(`Projects test`, () => {
-  test.beforeEach(async ({ page }) => {
-    let loginPage = new LoginPage(page);
-    await loginPage.login();
+let page: Page;
+test.beforeAll(async ({browser}) => {
+  page = await browser.newPage()
+  let loginPage = new LoginPage(page);
+  await loginPage.login();
+})
+
+test.describe(`Projects test - Create first empty project for the user`, () => {
+  test( "Test", async () => {
+    let projectPage = new ProjectsPage(page);
+      await projectPage.createProject();
+      await projectPage.verifyProjectLandingPage();
+      await projectPage.verifyProjectTitle();
+      await projectPage.verifyNumberOfProjectTileInProjectsPage(1);
+  });
+  test.afterEach(async () => {
+    await deleteProjects();
+  });
+});
+
+test.describe(`Projects test - Add plain key and translation in the project for the user`, () => {
+  test.beforeEach( async () => {
+    await createProject();
   });
 
-  test(`Add first project for the user`, async ({ page }) => {
+  test(`Add plain key and translation for the key`, async () => {
+    let keyPage = new KeysPage(page);
     let projectPage = new ProjectsPage(page);
-    await test.step(`Create empty project`, async () => {
-      await projectPage.createProject();
-    });
-    await test.step(`Verify landing page of the project`, async () => {
-      await projectPage.verifyProjectLandingPage();
-    });
-    await test.step(
-      `Verify project name in the project landing page`,
-      async () => {
-        await projectPage.verifyProjectTitle();
-      }
-    );
-    await test.step(
-      `Verify if there is only one project in the Projects page`,
-      async () => {
-        await projectPage.navigateTo("/project");
-        await projectPage.verifyNumberOfProjectTile(1);
-      }
-    );
+    await projectPage.selectProject();
+    await keyPage.clickAddKey()
+    await keyPage.enterInitialKeyDetails()
+    await keyPage.saveKey()
+  });
+  test.afterEach(async () => {
+    await deleteProjects();
+  });
+});
+
+test.describe(`Projects test - Add plural key and translation in the project for the user`, () => {
+  test.beforeEach( async () => {
+    await createProject();
+  });
+
+  test(`Add plural key and translation for the key`, async () => {
+    let keyPage = new KeysPage(page);
+    let projectPage = new ProjectsPage(page);
+    await projectPage.selectProject();
+    await keyPage.clickAddKey()
+    await keyPage.enterInitialKeyDetails()
+    await keyPage.enterPluralKeyDetails()
+    await keyPage.saveKey()
   });
 
   test.afterEach(async () => {
     await deleteProjects();
   });
 });
+
