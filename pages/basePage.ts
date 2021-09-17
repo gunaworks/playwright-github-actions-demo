@@ -26,7 +26,7 @@ export class BasePage {
 
   reloadPage = async () => {
     await this.page.reload();
-  }
+  };
 
   urlContainsText = async (link: string) => {
     expect(this.page.url().includes(link)).toBeTruthy();

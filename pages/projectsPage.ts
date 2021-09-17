@@ -1,8 +1,7 @@
 import { BasePage } from "./basePage";
+import { projectName } from "../utils/faker/fakerUtils";
 import { expect, Page } from "@playwright/test";
 
-let projectName = "";
-const faker = require("faker");
 const locators = {
   newProjectButton: "text=adding a project", //'.efuNYJ.sc-bdnxRM',
   // newProjectButton: ".efuNYJ.sc-bdnxRM", //'.efuNYJ.sc-bdnxRM',
@@ -16,7 +15,7 @@ const locators = {
   userLandingPage: ".sc-dlMDgC", //'.jfZxKp.sc-bdnxRM',
   projectTitle: "a.project-title-wrapper",
   projectTile: "//div[@data-rbd-droppable-id='droppable']/div[*]",
-  project: "[data-name='project-name']"
+  project: "[data-name='project-name']",
 };
 
 export class ProjectsPage extends BasePage {
@@ -41,17 +40,16 @@ export class ProjectsPage extends BasePage {
   };
 
   private enterProjectDetails = async () => {
-    projectName = "Project " + faker.name.firstName();
     await this.type(locators.projectName, projectName);
     await this.waitForElement(locators.createProject);
     await this.click(locators.createProject);
   };
 
-  selectProject = async() => {
+  selectProject = async () => {
     await this.reloadPage();
     await this.waitForElement(locators.project);
     await this.click(locators.project);
-  }
+  };
 
   verifyProjectLandingPage = async () => {
     await this.waitForElement(locators.projectsLandingPage);
