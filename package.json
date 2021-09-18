@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "test": "npx playwright test",
-    "pretty-code": "npx prettier --write ."
+    "pretty-code": "npx prettier --write .",
+    "report": "allure serve",
+    "test:record": "npx playwright codegen"
   },
   "devDependencies": {
     "@playwright/test": "^1.14.1",
