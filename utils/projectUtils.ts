@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import axios from "./axios";
 import { createProjectRequest } from "./projectTestData";
+import { createKeyRequest } from "./keyTestData";
 
 export const deleteProjects = async () => {
   let projectId = await getProjects();
@@ -17,6 +18,17 @@ export const createProject = async () => {
     expect(response.data.project_id).not.toBeNull();
   });
 };
+
+export const createKey = async (keyType: string) => {
+  let projectId = await getProjects();
+  await axios
+    .post(`projects/${projectId}:master/keys`, createKeyRequest(keyType))
+    .then(function (response) {
+      expect(response.status).toBe(200);
+      expect(response.data.keys[0].key_id).not.toBeNull();
+    });
+};
+
 const getProjects = async () => {
   let response = await axios.get(`projects`).then(function (response) {
     expect(response.status).toBe(200);
