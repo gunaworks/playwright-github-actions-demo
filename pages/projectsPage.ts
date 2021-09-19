@@ -1,21 +1,21 @@
-import { BasePage } from "./basePage";
-import { projectName } from "../utils/faker/fakerUtils";
-import { expect, Page } from "@playwright/test";
+import { BasePage } from './basePage';
+import { projectName } from '../utils/faker/fakerUtils';
+import { expect, Page } from '@playwright/test';
 
 const locators = {
-  newProjectButton: "text=adding a project", //'.efuNYJ.sc-bdnxRM',
+  newProjectButton: 'text=adding a project', //'.efuNYJ.sc-bdnxRM',
   // newProjectButton: ".efuNYJ.sc-bdnxRM", //'.efuNYJ.sc-bdnxRM',
-  addProjectOverlay: "div#addproject .modal-content",
-  projectName: "input#project-name",
-  createProject: "a#project-add",
-  projectsLandingPage: "div.sc-jJMGnK",
-  addKeysSection: ".fSCyFf.sc-carFqZ > div:nth-of-type(3)",
-  addKeyButton: ".sc-bdnxRM.add-key-trigger",
-  keyEditorOverlay: "div#addkey  .modal-content",
-  userLandingPage: ".sc-dlMDgC", //'.jfZxKp.sc-bdnxRM',
-  projectTitle: "a.project-title-wrapper",
-  projectTile: "//div[@data-rbd-droppable-id='droppable']/div[*]",
-  project: "[data-name='project-name']",
+  addProjectOverlay: 'div#addproject .modal-content',
+  projectName: 'input#project-name',
+  createProject: 'a#project-add',
+  projectsLandingPage: 'div.sc-jJMGnK',
+  addKeysSection: '.fSCyFf.sc-carFqZ > div:nth-of-type(3)',
+  addKeyButton: '.sc-bdnxRM.add-key-trigger',
+  keyEditorOverlay: 'div#addkey  .modal-content',
+  userLandingPage: '.sc-dlMDgC', //'.jfZxKp.sc-bdnxRM',
+  projectTitle: 'a.project-title-wrapper',
+  projectTile: '//div[@data-rbd-droppable-id=\'droppable\']/div[*]',
+  project: '[data-name=\'project-name\']',
 };
 
 export class ProjectsPage extends BasePage {
@@ -31,7 +31,7 @@ export class ProjectsPage extends BasePage {
 
   private validateProjectPage = async () => {
     await this.waitForElement(locators.userLandingPage);
-    await this.navigateTo("/projects");
+    await this.navigateTo('/projects');
   };
 
   private createNewProject = async () => {
@@ -51,7 +51,7 @@ export class ProjectsPage extends BasePage {
     await this.click(locators.project);
   };
 
-  verifyProjectLandingPage = async () => {
+  verifyProjectLandingPage: () => Promise<void> = async () => {
     await this.waitForElement(locators.projectsLandingPage);
     await expect(
       await this.page.locator(locators.projectsLandingPage)
@@ -61,14 +61,14 @@ export class ProjectsPage extends BasePage {
   verifyProjectTitle = async () => {
     await this.waitForElement(locators.projectTitle);
     await expect(await this.page.locator(locators.projectTitle)).toBeVisible();
-    let textContent = await this.page
+    const textContent = await this.page
       .locator(locators.projectTitle)
       .innerText();
     expect(textContent).toContain(projectName);
   };
 
   verifyNumberOfProjectTileInProjectsPage = async (count: any) => {
-    await this.navigateTo(`/projects`);
+    await this.navigateTo('/projects');
     await this.waitForElement(locators.projectTile);
     expect(await this.page.locator(locators.projectTile).count()).toBe(count);
   };

@@ -1,22 +1,22 @@
-import { BasePage } from "./basePage";
-import { keyName } from "../utils/faker/fakerUtils";
-import { Page } from "@playwright/test";
+import { BasePage } from './basePage';
+import { keyName, translation } from '../utils/faker/fakerUtils';
+import { Page } from '@playwright/test';
 
 const locators = {
-  addKeyButton: ".sc-bdnxRM.add-key-trigger",
-  addKeyOverlay: "div#addkey  .modal-content",
-  keyNameField: "input#keyName",
-  platforms: "//input[@id='s2id_autogen8']",
-  availableListOfPlatforms: "[id='select2-drop']",
+  addKeyButton: '.sc-bdnxRM.add-key-trigger',
+  addKeyOverlay: 'div#addkey  .modal-content',
+  keyNameField: 'input#keyName',
+  platforms: '//input[@id=\'s2id_autogen8\']',
+  availableListOfPlatforms: '[id=\'select2-drop\']',
   firstAvailablePlatform:
-    "ul.select2-results > li[role='presentation']:first-of-type",
-  saveKey: "[id='btn_addkey']",
-  keySection: ".row.row-key",
-  translations: "//*[@class='highlight']",
-  key: ".current",
-  translationsSection: ".clearfix",
-  translationTextBox: "div[role='presentation'] > pre[role='presentation']",
-  saveTranslation: ".save > img",
+    'ul.select2-results > li[role=\'presentation\']:first-of-type',
+  saveKey: '[id=\'btn_addkey\']',
+  keySection: '.row.row-key',
+  translations: '//*[@class=\'highlight\']',
+  key: '.current',
+  translationsSection: '.clearfix',
+  translationTextBox: 'div[role=\'presentation\'] > pre[role=\'presentation\']',
+  saveTranslation: '.save > img',
 };
 
 export class KeysPage extends BasePage {
@@ -50,14 +50,14 @@ export class KeysPage extends BasePage {
   };
 
   verifyKeyInProjectsPage = async () => {
-    await this.navigateTo("/projects");
+    await this.navigateTo('/projects');
   };
 
   async addTranslationForKeys() {
     await this.waitForElement(locators.key);
     await this.waitForElement(locators.translationsSection);
     await this.waitForElement(locators.translations);
-    let elements = await this.page.$$(locators.translations);
+    const elements = await this.page.$$(locators.translations);
     for await (const element of elements) {
       await element.click();
       await this.waitForElement(locators.translationTextBox);
