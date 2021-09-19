@@ -11,3 +11,4 @@ gen
 .LSOverride
 
 node_modules
+allure-results
