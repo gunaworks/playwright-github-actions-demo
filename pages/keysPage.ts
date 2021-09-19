@@ -53,7 +53,7 @@ export class KeysPage extends BasePage {
     await this.navigateTo('/projects');
   };
 
-  async addTranslationForKeys() {
+  async addTranslationForKey() {
     await this.waitForElement(locators.key);
     await this.waitForElement(locators.translationsSection);
     await this.waitForElement(locators.translations);
@@ -61,7 +61,7 @@ export class KeysPage extends BasePage {
     for await (const element of elements) {
       await element.click();
       await this.waitForElement(locators.translationTextBox);
-      await this.type(locators.translationTextBox, keyName);
+      await this.type(locators.translationTextBox, translation);
       await this.click(locators.saveTranslation);
     }
   }

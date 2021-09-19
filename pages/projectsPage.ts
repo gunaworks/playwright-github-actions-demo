@@ -23,7 +23,7 @@ export class ProjectsPage extends BasePage {
     super(page);
   }
 
-  createProject = async () => {
+  createFirstProject = async () => {
     await this.validateProjectPage();
     await this.createNewProject();
     await this.enterProjectDetails();

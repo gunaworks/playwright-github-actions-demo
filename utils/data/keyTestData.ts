@@ -1,5 +1,5 @@
-import { keyName } from "./faker/fakerUtils";
-import { KeyType } from "./constants";
+import { keyName } from "../faker/fakerUtils";
+import { KeyType } from "../constants";
 
 export function createKeyRequest(keyType: string) {
   const baseRequestBody = {
