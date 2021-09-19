@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import axios from './axios';
+import axios from './axios/config';
 import { createProjectRequest } from './data/projectTestData';
 import { createKeyRequest } from './data/keyTestData';
 

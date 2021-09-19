@@ -1,4 +1,4 @@
-import {projectDescription, projectName} from "../faker/fakerUtils";
+import { projectDescription, projectName } from '../faker/fakerUtils';
 
 export function createProjectRequest() {
   return {

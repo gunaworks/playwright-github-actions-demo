@@ -1,18 +1,18 @@
-import { PlaywrightTestConfig } from "@playwright/test";
-import { devices } from "playwright";
+import { PlaywrightTestConfig } from '@playwright/test';
+import { devices } from 'playwright';
 const config: PlaywrightTestConfig = {
   use: {
-    baseURL: "https://stage.lokalise.com",
-    browserName: "firefox",
+    baseURL: 'https://stage.lokalise.com',
+    browserName: 'firefox',
     headless: true,
   },
   reporter: [["allure-playwright"]],
   projects: [
     {
-      name: "Chrome browser",
+      name: 'Chrome browser',
       use: {
-        browserName: "chromium",
-        ...devices["Desktop Chrome"],
+        browserName: 'chromium',
+        ...devices['Desktop Chrome'],
       },
     },
   ],

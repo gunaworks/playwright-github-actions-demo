@@ -6,16 +6,16 @@ const locators = {
   addKeyButton: '.sc-bdnxRM.add-key-trigger',
   addKeyOverlay: 'div#addkey  .modal-content',
   keyNameField: 'input#keyName',
-  platforms: '//input[@id=\'s2id_autogen8\']',
-  availableListOfPlatforms: '[id=\'select2-drop\']',
+  platforms: "//input[@id='s2id_autogen8']",
+  availableListOfPlatforms: "[id='select2-drop']",
   firstAvailablePlatform:
-    'ul.select2-results > li[role=\'presentation\']:first-of-type',
-  saveKey: '[id=\'btn_addkey\']',
+    "ul.select2-results > li[role='presentation']:first-of-type",
+  saveKey: "[id='btn_addkey']",
   keySection: '.row.row-key',
-  translations: '//*[@class=\'highlight\']',
+  translations: "//*[@class='highlight']",
   key: '.current',
   translationsSection: '.clearfix',
-  translationTextBox: 'div[role=\'presentation\'] > pre[role=\'presentation\']',
+  translationTextBox: "div[role='presentation'] > pre[role='presentation']",
   saveTranslation: '.save > img',
 };
 

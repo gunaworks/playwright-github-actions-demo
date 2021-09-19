@@ -33,9 +33,9 @@ test.describe(
       await createProject();
     });
     test('Add plain key to the project', async () => {
-        const keyPage = new KeysPage(page);
-        const projectPage = new ProjectsPage(page);
-        await projectPage.selectProject();
+      const keyPage = new KeysPage(page);
+      const projectPage = new ProjectsPage(page);
+      await projectPage.selectProject();
       await keyPage.clickAddKey();
       await keyPage.enterInitialKeyDetails();
       await keyPage.saveKey();
@@ -69,11 +69,11 @@ test.describe(
       await createKey(KeyType.PLURAL_KEY);
     });
     test('Add translation to the plural key', async () => {
-        const keyPage = new KeysPage(page);
-        const projectPage = new ProjectsPage(page);
-        await projectPage.selectProject();
+      const keyPage = new KeysPage(page);
+      const projectPage = new ProjectsPage(page);
+      await projectPage.selectProject();
       await keyPage.addTranslationForKey();
-        await keyPage.verifyCompletionOfKeyTranslation();
+      await keyPage.verifyCompletionOfKeyTranslation();
     });
   }
 );

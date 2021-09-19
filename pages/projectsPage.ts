@@ -14,8 +14,8 @@ const locators = {
   keyEditorOverlay: 'div#addkey  .modal-content',
   userLandingPage: '.sc-dlMDgC', //'.jfZxKp.sc-bdnxRM',
   projectTitle: 'a.project-title-wrapper',
-  projectTile: '//div[@data-rbd-droppable-id=\'droppable\']/div[*]',
-  project: '[data-name=\'project-name\']',
+  projectTile: "//div[@data-rbd-droppable-id='droppable']/div[*]",
+  project: "[data-name='project-name']",
 };
 
 export class ProjectsPage extends BasePage {

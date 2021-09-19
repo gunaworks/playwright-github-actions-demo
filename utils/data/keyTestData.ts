@@ -1,5 +1,5 @@
-import { keyName } from "../faker/fakerUtils";
-import { KeyType } from "../constants";
+import { keyName } from '../faker/fakerUtils';
+import { KeyType } from '../constants';
 
 export function createKeyRequest(keyType: string) {
   const baseRequestBody = {
@@ -29,6 +29,6 @@ export function createKeyRequest(keyType: string) {
 }
 
 function platform() {
-  let platforms = ["web", "ios", "android", "other"];
+  let platforms = ['web', 'ios', 'android', 'other'];
   return platforms[Math.floor(Math.random() * platforms.length)];
 }
