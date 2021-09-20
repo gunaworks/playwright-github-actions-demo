@@ -7,7 +7,7 @@
     "test": "npx playwright test",
     "pretty-code": "npx prettier --write .",
     "report": "allure serve",
-    "test:record": "npx playwright codegen",
+    "record": "npx playwright codegen",
     "eslint": "eslint **/*.ts --ignore-pattern node_modules/ --fix"
   },
   "devDependencies": {
