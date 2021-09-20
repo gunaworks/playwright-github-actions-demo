@@ -1,7 +1,7 @@
 import { BasePage } from './basePage';
 import { keyName, translation } from '../utils/faker/fakerUtils';
-import {expect, Page} from '@playwright/test';
-import {API} from "../utils/constants";
+import { expect, Page } from '@playwright/test';
+import { API } from '../utils/constants';
 
 const locators = {
   addKeyButton: '.sc-bdnxRM.add-key-trigger',
@@ -13,12 +13,12 @@ const locators = {
     "ul.select2-results > li[role='presentation']:first-of-type",
   saveKey: "[id='btn_addkey']",
   keySection: '.row.row-key',
-  translations: ".highlight",
+  translations: '.highlight',
   key: '.current',
   translationsSection: '.clearfix',
   translationTextBox: "div[role='presentation'] > pre[role='presentation']",
   saveTranslation: '.save > img',
-  translationCompletion: '.eFuLkI.sc-fbIWvP'
+  translationCompletion: '.eFuLkI.sc-fbIWvP',
 };
 
 export class KeysPage extends BasePage {

@@ -5,5 +5,5 @@ export const KeyType = {
 
 export const API = {
   PROJECT: 'projects',
-  KEY: 'keys'
-}
+  KEY: 'keys',
+};

@@ -8,7 +8,7 @@ const config: PlaywrightTestConfig = {
     viewport: { width: 1500, height: 730 },
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    trace: 'retain-on-failure'
+    trace: 'retain-on-failure',
   },
   reporter: [['dot'], ['allure-playwright']],
   projects: [

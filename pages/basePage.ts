@@ -1,4 +1,4 @@
-import {expect, Page} from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export class BasePage {
   readonly page: Page;
@@ -34,7 +34,7 @@ export class BasePage {
   isEnabled = async (selector: string) => {
     await this.page.isEnabled(selector);
     await this.page.isVisible(selector);
-    await this.page.isEditable(selector,{strict:false})
+    await this.page.isEditable(selector, { strict: false });
   };
 
   urlContainsText = async (link: string) => {
