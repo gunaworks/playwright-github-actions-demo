@@ -7,7 +7,7 @@ import {
   createProject,
   deleteProjects,
 } from '../utils/projectUtils';
-import { KeyType } from '../utils/constants';
+import {API, KeyType} from '../utils/constants';
 
 let page: Page;
 test.beforeAll(async ({ browser }) => {
@@ -22,7 +22,7 @@ test.describe('Projects test - Create first empty project for the user', () => {
     await projectPage.createFirstProject();
     await projectPage.verifyProjectLandingPage();
     await projectPage.verifyProjectTitle();
-    await projectPage.verifyNumberOfProjectTileInProjectsPage(1);
+    await projectPage.verifyNumberOfProjectsInProjectsPage(1);
   });
 });
 
@@ -55,7 +55,7 @@ test.describe(
       const keyPage = new KeysPage(page);
       const projectPage = new ProjectsPage(page);
       await projectPage.selectProject();
-      await keyPage.addTranslationForKey();
+      await keyPage.addTranslation();
       await keyPage.verifyCompletionOfKeyTranslation();
     });
   }
@@ -72,7 +72,7 @@ test.describe(
       const keyPage = new KeysPage(page);
       const projectPage = new ProjectsPage(page);
       await projectPage.selectProject();
-      await keyPage.addTranslationForKey();
+      await keyPage.addTranslation();
       await keyPage.verifyCompletionOfKeyTranslation();
     });
   }

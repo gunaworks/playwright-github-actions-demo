@@ -30,10 +30,13 @@ export const createKey = async (keyType: string) => {
 };
 
 const getProjects = async () => {
-  const response = await axios.get('projects').then(function (response) {
+  const response = await axios.get(`${API.PROJECT}`).then(function (response) {
+    let projects = response.data.projects;
+    expect(projects.project_id).not.toBeNull()
     expect(response.status).toBe(200);
-    expect(response.data.projects[0].project_id).not.toBeNull();
+    expect(response.data.projects).not.toBeNull();
     return response;
   });
-  return response.data.projects[0].project_id;
+
+  return response.data.projects;
 };

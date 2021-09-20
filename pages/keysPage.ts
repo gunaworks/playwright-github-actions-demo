@@ -1,6 +1,7 @@
 import { BasePage } from './basePage';
 import { keyName, translation } from '../utils/faker/fakerUtils';
-import { Page } from '@playwright/test';
+import {expect, Page} from '@playwright/test';
+import {API} from "../utils/constants";
 
 const locators = {
   addKeyButton: '.sc-bdnxRM.add-key-trigger',
@@ -12,11 +13,12 @@ const locators = {
     "ul.select2-results > li[role='presentation']:first-of-type",
   saveKey: "[id='btn_addkey']",
   keySection: '.row.row-key',
-  translations: "//*[@class='highlight']",
+  translations: ".highlight",
   key: '.current',
   translationsSection: '.clearfix',
   translationTextBox: "div[role='presentation'] > pre[role='presentation']",
   saveTranslation: '.save > img',
+  translationCompletion: '.eFuLkI.sc-fbIWvP'
 };
 
 export class KeysPage extends BasePage {
@@ -24,13 +26,13 @@ export class KeysPage extends BasePage {
     super(page);
   }
 
-  clickAddKey = async () => {
+  addKey = async () => {
     await this.waitForElement(locators.addKeyButton);
     await this.click(locators.addKeyButton);
     await this.waitForElement(locators.addKeyOverlay);
   };
 
-  enterInitialKeyDetails = async () => {
+  enterKeyDetails = async () => {
     await this.type(locators.keyNameField, keyName);
     await this.click(locators.platforms);
     await this.waitForElement(locators.availableListOfPlatforms);
@@ -50,10 +52,10 @@ export class KeysPage extends BasePage {
   };
 
   verifyKeyInProjectsPage = async () => {
-    await this.navigateTo('/projects');
+    await this.navigateTo(`${API.PROJECT}`);
   };
 
-  async addTranslationForKey() {
+  addTranslation = async () => {
     await this.waitForElement(locators.key);
     await this.waitForElement(locators.translationsSection);
     await this.waitForElement(locators.translations);
