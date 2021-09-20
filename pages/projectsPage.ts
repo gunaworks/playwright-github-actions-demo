@@ -32,13 +32,25 @@ export class ProjectsPage extends BasePage {
     await this.enterProjectDetails();
   };
 
+  createNthProject = async () => {
+    await this.navigateTo(`${API.PROJECT}`)
+    await this.clickAddProject();
+    await this.waitForProjectOverlay();
+    await this.enterProjectDetails();
+  }
   private validateProjectPage = async () => {
     await this.waitForElement(locators.userLandingPage);
-    await this.navigateTo('/projects');
   };
 
   private clickNewProject = async () => {
     await this.click(locators.newProjectButton);
+  };
+
+  private clickAddProject = async () => {
+    await this.click(locators.addProjectButton);
+  };
+
+  private waitForProjectOverlay = async () => {
     await this.waitForElement(locators.addProjectOverlay);
   };
 

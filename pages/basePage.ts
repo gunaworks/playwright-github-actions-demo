@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 
 export class BasePage {
   readonly page: Page;
@@ -23,8 +23,18 @@ export class BasePage {
     await this.page.waitForSelector(selector);
   };
 
+  getText = async (selector: string) => {
+    return await this.page.innerText(selector);
+  };
+
   reloadPage = async () => {
     await this.page.reload();
+  };
+
+  isEnabled = async (selector: string) => {
+    await this.page.isEnabled(selector);
+    await this.page.isVisible(selector);
+    await this.page.isEditable(selector,{strict:false})
   };
 
   urlContainsText = async (link: string) => {

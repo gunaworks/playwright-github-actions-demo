@@ -62,9 +62,18 @@ export class KeysPage extends BasePage {
     const elements = await this.page.$$(locators.translations);
     for await (const element of elements) {
       await element.click();
+      // element.$('.spellcheck-match')
       await this.waitForElement(locators.translationTextBox);
       await this.type(locators.translationTextBox, translation);
       await this.click(locators.saveTranslation);
+      await this.isEnabled(locators.translations);
     }
+  };
+
+  async verifyCompletionOfKeyTranslation() {
+    await this.navigateTo(`${API.PROJECT}`);
+    await this.reloadPage();
+    await this.waitForElement(locators.translationCompletion);
+    expect(await this.getText(locators.translationCompletion)).toContain('100');
   }
 }

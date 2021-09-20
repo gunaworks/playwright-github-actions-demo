@@ -2,27 +2,30 @@ import { expect } from '@playwright/test';
 import axios from './axios/config';
 import { createProjectRequest } from './data/projectTestData';
 import { createKeyRequest } from './data/keyTestData';
+import {API} from "./constants";
 
 export const deleteProjects = async () => {
-  const projectId = await getProjects();
-  await axios.delete(`projects/${projectId}`).then(function (response) {
-    expect(response.status).toBe(200);
-    expect(response.data.project_deleted).toBe(true);
-  });
+  const projects = await getProjects();
+  for (let i = 0; i < projects.length; i++) {
+    await axios.delete(`${API.PROJECT}/${projects[i].project_id}`).then(function (response) {
+      expect(response.status).toBe(200);
+      expect(response.data.project_deleted).toBe(true);
+    });
+  }
 };
 
 export const createProject = async () => {
   const body = createProjectRequest();
-  await axios.post('projects', body).then(function (response) {
+  await axios.post(`${API.PROJECT}`, body).then(function (response) {
     expect(response.status).toBe(200);
     expect(response.data.project_id).not.toBeNull();
   });
 };
 
 export const createKey = async (keyType: string) => {
-  const projectId = await getProjects();
+  const projects = await getProjects();
   await axios
-    .post(`projects/${projectId}:master/keys`, createKeyRequest(keyType))
+    .post(`${API.PROJECT}/${projects[0].project_id}:master/${API.KEY}`, createKeyRequest(keyType))
     .then(function (response) {
       expect(response.status).toBe(200);
       expect(response.data.keys[0].key_id).not.toBeNull();
