@@ -6,7 +6,7 @@ const config: PlaywrightTestConfig = {
     headless: true,
     ignoreHTTPSErrors: true,
     viewport: { width: 1500, height: 730 },
-    screenshot: 'only-on-failure'
+    screenshot: 'only-on-failure',
   },
   workers: 1,
   reporter: [['dot'], ['allure-playwright']],
@@ -24,7 +24,7 @@ const config: PlaywrightTestConfig = {
         browserName: 'firefox',
         ...devices['Desktop Firefox'],
       },
-    }
+    },
   ],
 };
 export default config;

@@ -26,14 +26,14 @@ export class ProjectsPage extends BasePage {
 
   createFirstProject = async () => {
     await this.validateProjectPage();
-    await this.navigateTo(`${API.PROJECT}`);
+    await this.navigateTo(`${API.PROJECT_API}`);
     await this.clickNewProject();
     await this.waitForProjectOverlay();
     await this.enterProjectDetails();
   };
 
   createNthProject = async () => {
-    await this.navigateTo(`${API.PROJECT}`);
+    await this.navigateTo(`${API.PROJECT_API}`);
     await this.clickAddProject();
     await this.waitForProjectOverlay();
     await this.enterProjectDetails();
@@ -83,7 +83,7 @@ export class ProjectsPage extends BasePage {
   };
 
   verifyNumberOfProjectsInProjectsPage = async (count: any) => {
-    await this.navigateTo(`${API.PROJECT}`);
+    await this.navigateTo(`${API.PROJECT_API}`);
     await this.waitForElement(locators.projectTile);
     expect(await this.page.locator(locators.projectTile).count()).toBe(count);
   };

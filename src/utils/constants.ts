@@ -3,7 +3,5 @@ export const KeyType = {
   PLURAL_KEY: 'PLURAL_KEY',
 };
 
-export const API = {
-  PROJECT: 'projects',
-  KEY: 'keys',
-};
+export const PROJECT_API = 'projects';
+export const KEY_API = 'keys';

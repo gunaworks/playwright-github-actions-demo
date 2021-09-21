@@ -52,7 +52,7 @@ export class KeysPage extends BasePage {
   };
 
   verifyKeyInProjectsPage = async () => {
-    await this.navigateTo(`${API.PROJECT}`);
+    await this.navigateTo(`${API.PROJECT_API}`);
   };
 
   addTranslation = async () => {
@@ -62,7 +62,6 @@ export class KeysPage extends BasePage {
     const elements = await this.page.$$(locators.translations);
     for await (const element of elements) {
       await element.click();
-      // element.$('.spellcheck-match')
       await this.waitForElement(locators.translationTextBox);
       await this.type(locators.translationTextBox, translation);
       await this.click(locators.saveTranslation);
@@ -71,7 +70,7 @@ export class KeysPage extends BasePage {
   };
 
   async verifyCompletionOfKeyTranslation() {
-    await this.navigateTo(`${API.PROJECT}`);
+    await this.navigateTo(`${API.PROJECT_API}`);
     await this.reloadPage();
     await this.waitForElement(locators.translationCompletion);
     expect(await this.getText(locators.translationCompletion)).toContain('100');

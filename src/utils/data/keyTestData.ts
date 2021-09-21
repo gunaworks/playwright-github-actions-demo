@@ -29,6 +29,6 @@ export function createKeyRequest(keyType: string) {
 }
 
 function platform() {
-  let platforms = ['web', 'ios', 'android', 'other'];
+  const platforms = ['web', 'ios', 'android', 'other'];
   return platforms[Math.floor(Math.random() * platforms.length)];
 }

@@ -16,10 +16,10 @@ export class LoginPage extends BasePage {
 
   login = async () => {
     await this.navigateTo('/login');
-    await this.type(locators.emailAddress, process.env.EMAIL);
-    // await this.type(locators.emailAddress, 'franco@fra.org');
-    await this.type(locators.password, process.env.PASSWORD);
-    // await this.type(locators.password, 'Abcd1234');
+    // await this.type(locators.emailAddress, process.env.EMAIL);
+    await this.type(locators.emailAddress, 'franco@fra.org');
+    // await this.type(locators.password, process.env.PASSWORD);
+    await this.type(locators.password, 'Abcd1234');
     await this.click(locators.loginButton);
   };
 }
