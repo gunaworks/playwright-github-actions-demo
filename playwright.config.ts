@@ -3,7 +3,7 @@ import { devices } from 'playwright';
 const config: PlaywrightTestConfig = {
   use: {
     baseURL: 'https://stage.lokalise.com/',
-    headless: false,
+    headless: true,
     ignoreHTTPSErrors: true,
     viewport: { width: 1500, height: 730 },
     screenshot: 'only-on-failure',

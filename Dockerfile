@@ -3,4 +3,6 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-CMD ["yarn", "test"]
+COPY ./run-tests.sh ./
+RUN chmod +x run-tests.sh
+ENTRYPOINT [ "./run-tests.sh" ]

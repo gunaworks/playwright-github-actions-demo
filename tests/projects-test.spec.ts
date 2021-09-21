@@ -52,7 +52,7 @@ test.describe(
       await loginPage.login();
       await createProject();
     });
-    test.only('Add plain key to the project', async ({ page }) => {
+    test('Add plain key to the project', async ({ page }) => {
       const keyPage = new KeysPage(page);
       const projectPage = new ProjectsPage(page);
       await projectPage.selectProject();
