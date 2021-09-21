@@ -1,5 +1,6 @@
 import { BasePage } from './basePage';
 import { Page } from '@playwright/test';
+import { logger } from '../utils/logger';
 
 const locators = {
   emailAddress: 'div:nth-of-type(1) > .jKLUHq.sc-gXfVKN',
@@ -15,11 +16,20 @@ export default class LoginPage extends BasePage {
   }
 
   login = async () => {
-    await this.navigateTo('/login');
-    // await this.type(locators.emailAddress, process.env.EMAIL);
-    await this.type(locators.emailAddress, 'franco@fra.org');
-    // await this.type(locators.password, process.env.PASSWORD);
-    await this.type(locators.password, 'Abcd1234');
-    await this.click(locators.loginButton);
+    try {
+      await this.navigateTo('/login');
+      // await this.type(locators.emailAddress, process.env.EMAIL);
+      await this.type(locators.emailAddress, 'franco@fra.org');
+      // await this.type(locators.password, process.env.PASSWORD);
+      await this.type(locators.password, 'Abcd1234');
+      await this.click(locators.loginButton);
+      logger.info('User logged in successfully!');
+    } catch (e) {
+      logger.error(
+        'Error while logging into the application with the credentials',
+        e
+      );
+      throw e;
+    }
   };
 }

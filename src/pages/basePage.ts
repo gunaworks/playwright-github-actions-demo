@@ -10,7 +10,9 @@ export class BasePage {
     await this.page.goto(url);
   };
 
-  protected click = async (selector: string) => this.page.click(selector);
+  protected click = async (selector: string) => {
+    await this.page.click(selector);
+  };
 
   type = async (selector: string, keys: any) => {
     await this.page.type(selector, keys);
@@ -21,6 +23,10 @@ export class BasePage {
 
   waitForElement = async (selector: string) => {
     await this.page.waitForSelector(selector);
+  };
+
+  locateElement = async (selector: string) => {
+    return this.page.locator(selector);
   };
 
   getText = async (selector: string) => {

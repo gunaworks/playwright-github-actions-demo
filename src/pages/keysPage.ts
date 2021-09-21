@@ -2,6 +2,7 @@ import { BasePage } from './basePage';
 import { keyName, translation } from '../utils/faker/fakerUtils';
 import { expect, Page } from '@playwright/test';
 import { PROJECT_API } from '../utils/constants';
+import { logger } from '../utils/logger';
 
 const locators = {
   addKeyButton: '.sc-bdnxRM.add-key-trigger',
@@ -27,52 +28,94 @@ export default class KeysPage extends BasePage {
   }
 
   addKey = async () => {
-    await this.waitForElement(locators.addKeyButton);
-    await this.click(locators.addKeyButton);
-    await this.waitForElement(locators.addKeyOverlay);
+    try {
+      await this.waitForElement(locators.addKeyButton);
+      await this.click(locators.addKeyButton);
+      await this.waitForElement(locators.addKeyOverlay);
+      logger.info('Clicked on add key button');
+    } catch (e) {
+      logger.error('Error while clicking on add key button', e);
+      throw e;
+    }
   };
 
   enterKeyDetails = async () => {
-    await this.type(locators.keyNameField, keyName);
-    await this.click(locators.platforms);
-    await this.waitForElement(locators.availableListOfPlatforms);
-    await this.click(locators.firstAvailablePlatform);
-  };
-
-  enterPluralKeyDetails = async () => {
-    await this.type(locators.keyNameField, keyName);
-    await this.click(locators.platforms);
-    await this.waitForElement(locators.availableListOfPlatforms);
-    await this.click(locators.firstAvailablePlatform);
+    try {
+      await this.type(locators.keyNameField, keyName);
+      await this.click(locators.platforms);
+      await this.waitForElement(locators.availableListOfPlatforms);
+      await this.click(locators.firstAvailablePlatform);
+      logger.info('Entered details for the key');
+    } catch (e) {
+      logger.error('Error while entering the details for the key', e);
+      throw e;
+    }
   };
 
   saveKey = async () => {
-    await this.click(locators.saveKey);
-    await this.waitForElement(locators.keySection);
+    try {
+      await this.click(locators.saveKey);
+      await this.waitForElement(locators.keySection);
+      logger.info('Save the key with the entered details');
+    } catch (e) {
+      logger.error(
+        'Error while saving the key after the details are entered',
+        e
+      );
+      throw e;
+    }
   };
 
   verifyKeyInProjectsPage = async () => {
-    await this.navigateTo(`${PROJECT_API}`);
+    try {
+      await this.navigateTo(`${PROJECT_API}`);
+      logger.info('Key creation verified in the projects page');
+    } catch (e) {
+      logger.error(
+        'Error while verifying the created key in the projects page',
+        e
+      );
+      throw e;
+    }
   };
 
   addTranslation = async () => {
-    await this.waitForElement(locators.key);
-    await this.waitForElement(locators.translationsSection);
-    await this.waitForElement(locators.translations);
-    const elements = await this.page.$$(locators.translations);
-    for await (const element of elements) {
-      await element.click();
-      await this.waitForElement(locators.translationTextBox);
-      await this.type(locators.translationTextBox, translation);
-      await this.click(locators.saveTranslation);
-      await this.isEnabled(locators.translations);
+    try {
+      await this.waitForElement(locators.key);
+      await this.waitForElement(locators.translationsSection);
+      await this.waitForElement(locators.translations);
+      const elements = await this.page.$$(locators.translations);
+      for await (const element of elements) {
+        await element.click();
+        await this.waitForElement(locators.translationTextBox);
+        await this.type(locators.translationTextBox, translation);
+        await this.click(locators.saveTranslation);
+        await this.isEnabled(locators.translations);
+      }
+      logger.info('Added translation for the created key');
+    } catch (e) {
+      logger.error('Error while adding the translation for the created key', e);
+      throw e;
     }
   };
 
   async verifyCompletionOfKeyTranslation() {
-    await this.navigateTo(`${PROJECT_API}`);
-    await this.reloadPage();
-    await this.waitForElement(locators.translationCompletion);
-    expect(await this.getText(locators.translationCompletion)).toContain('100');
+    try {
+      await this.navigateTo(`${PROJECT_API}`);
+      await this.reloadPage();
+      await this.waitForElement(locators.translationCompletion);
+      expect(await this.getText(locators.translationCompletion)).toContain(
+        '100'
+      );
+      logger.info(
+        'Verified the completion of key translation in the projects page'
+      );
+    } catch (e) {
+      logger.error(
+        'Error while verifying the key completion in the projects page',
+        e
+      );
+      throw e;
+    }
   }
 }

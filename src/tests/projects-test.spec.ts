@@ -1,4 +1,4 @@
-import test, {expect} from '../fixtures/baseFixture'
+import test from '../fixtures/baseFixture';
 import {
   createKey,
   createProject,
@@ -23,7 +23,7 @@ test.describe('Projects test - Add nth project for the user', () => {
     await loginPage.login();
     await createProject();
   });
-  test('Add nth project', async ({ projectsPage }) => {
+  test.only('Add nth project', async ({ projectsPage }) => {
     await projectsPage.createNthProject();
     await projectsPage.verifyProjectTitle();
     await projectsPage.verifyNumberOfProjectsInProjectsPage(2);
@@ -55,7 +55,10 @@ test.describe(
       await createProject();
       await createKey(KeyType.PLAIN_KEY);
     });
-    test('Add translation to the plain key', async ({ keysPage, projectsPage }) => {
+    test('Add translation to the plain key', async ({
+      keysPage,
+      projectsPage,
+    }) => {
       await projectsPage.selectProject();
       await keysPage.addTranslation();
       await keysPage.verifyCompletionOfKeyTranslation();
@@ -71,7 +74,10 @@ test.describe(
       await createProject();
       await createKey(KeyType.PLURAL_KEY);
     });
-    test('Add translation to the plural key', async ({ keysPage, projectsPage }) => {
+    test('Add translation to the plural key', async ({
+      keysPage,
+      projectsPage,
+    }) => {
       await projectsPage.selectProject();
       await keysPage.addTranslation();
       await keysPage.verifyCompletionOfKeyTranslation();

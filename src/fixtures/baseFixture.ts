@@ -1,8 +1,8 @@
-import LoginPage from "../pages/loginPage"
-import KeysPage from "../pages/keysPage"
-import ProjectsPage from "../pages/projectsPage"
+import LoginPage from '../pages/loginPage';
+import KeysPage from '../pages/keysPage';
+import ProjectsPage from '../pages/projectsPage';
 
-import { test as baseTest } from "@playwright/test";
+import { test as baseTest } from '@playwright/test';
 
 const test = baseTest.extend<{
   loginPage: LoginPage;
@@ -18,6 +18,5 @@ const test = baseTest.extend<{
   projectsPage: async ({ page }, use) => {
     await use(new ProjectsPage(page));
   },
-})
+});
 export default test;
-export const expect = test.expect;

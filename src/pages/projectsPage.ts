@@ -2,6 +2,7 @@ import { BasePage } from './basePage';
 import { projectName } from '../utils/faker/fakerUtils';
 import { expect, Page } from '@playwright/test';
 import { PROJECT_API } from '../utils/constants';
+import { logger } from '../utils/logger';
 
 const locators = {
   newProjectButton: 'text=adding a project', //'.efuNYJ.sc-bdnxRM',
@@ -39,15 +40,33 @@ export default class ProjectsPage extends BasePage {
     await this.enterProjectDetails();
   };
   private validateProjectPage = async () => {
-    await this.waitForElement(locators.userLandingPage);
+    try {
+      await this.waitForElement(locators.userLandingPage);
+      logger.info('Navigated to projects page');
+    } catch (e) {
+      logger.error('Error while landing to projects page', e);
+      throw e;
+    }
   };
 
   private clickNewProject = async () => {
-    await this.click(locators.newProjectButton);
+    try {
+      await this.click(locators.newProjectButton);
+      logger.info('Clicked on new project button');
+    } catch (e) {
+      logger.error('Failed to click the new project button', e);
+      throw e;
+    }
   };
 
   private clickAddProject = async () => {
-    await this.click(locators.addProjectButton);
+    try {
+      await this.click(locators.addProjectButton);
+      logger.info('Clicked on add project button');
+    } catch (e) {
+      logger.error('Failed to click the add project button', e);
+      throw e;
+    }
   };
 
   private waitForProjectOverlay = async () => {
@@ -55,15 +74,30 @@ export default class ProjectsPage extends BasePage {
   };
 
   private enterProjectDetails = async () => {
-    await this.type(locators.projectName, projectName);
-    await this.waitForElement(locators.createProject);
-    await this.click(locators.createProject);
+    try {
+      await this.type(locators.projectName, projectName);
+      await this.waitForElement(locators.createProject);
+      await this.click(locators.createProject);
+      logger.info('Entered details for creating the project');
+    } catch (e) {
+      logger.error('Error while entering the project details', e);
+      throw e;
+    }
   };
 
   selectProject = async () => {
-    await this.reloadPage();
-    await this.waitForElement(locators.project);
-    await this.click(locators.project);
+    try {
+      await this.reloadPage();
+      await this.waitForElement(locators.project);
+      await this.click(locators.project);
+      logger.info('Selected the project from the projects page');
+    } catch (e) {
+      logger.error(
+        'Error while selecting the project from the projects page',
+        e
+      );
+      throw e;
+    }
   };
 
   verifyProjectLandingPage: () => Promise<void> = async () => {
