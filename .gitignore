@@ -13,3 +13,4 @@ gen
 node_modules
 allure-results
 test-results
+allure-report

@@ -6,10 +6,9 @@ const config: PlaywrightTestConfig = {
     headless: true,
     ignoreHTTPSErrors: true,
     viewport: { width: 1500, height: 730 },
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure'
   },
+  workers: 1,
   reporter: [['dot'], ['allure-playwright']],
   projects: [
     {
@@ -25,14 +24,7 @@ const config: PlaywrightTestConfig = {
         browserName: 'firefox',
         ...devices['Desktop Firefox'],
       },
-    },
-    {
-      name: 'Edge',
-      use: {
-        browserName: 'chromium',
-        ...devices['Desktop Edge'],
-      },
-    },
+    }
   ],
 };
 export default config;
