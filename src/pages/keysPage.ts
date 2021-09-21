@@ -1,7 +1,7 @@
 import { BasePage } from './basePage';
 import { keyName, translation } from '../utils/faker/fakerUtils';
 import { expect, Page } from '@playwright/test';
-import { API } from '../utils/constants';
+import { PROJECT_API } from '../utils/constants';
 
 const locators = {
   addKeyButton: '.sc-bdnxRM.add-key-trigger',
@@ -21,7 +21,7 @@ const locators = {
   translationCompletion: '.eFuLkI.sc-fbIWvP',
 };
 
-export class KeysPage extends BasePage {
+export default class KeysPage extends BasePage {
   constructor(page: Page) {
     super(page);
   }
@@ -52,7 +52,7 @@ export class KeysPage extends BasePage {
   };
 
   verifyKeyInProjectsPage = async () => {
-    await this.navigateTo(`${API.PROJECT_API}`);
+    await this.navigateTo(`${PROJECT_API}`);
   };
 
   addTranslation = async () => {
@@ -70,7 +70,7 @@ export class KeysPage extends BasePage {
   };
 
   async verifyCompletionOfKeyTranslation() {
-    await this.navigateTo(`${API.PROJECT_API}`);
+    await this.navigateTo(`${PROJECT_API}`);
     await this.reloadPage();
     await this.waitForElement(locators.translationCompletion);
     expect(await this.getText(locators.translationCompletion)).toContain('100');

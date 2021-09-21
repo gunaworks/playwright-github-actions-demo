@@ -40,8 +40,4 @@ export class BasePage {
   urlContainsText = async (link: string) => {
     expect(this.page.url().includes(link)).toBeTruthy();
   };
-
-  selectOptionInDropdown = async (selector: string, option: string) => {
-    await this.page.selectOption(selector, option);
-  };
 }

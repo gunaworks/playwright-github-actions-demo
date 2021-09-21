@@ -9,7 +9,7 @@ const locators = {
   // userLandingPage: ".jfZxKp.sc-bdnxRM", //'.sc-dlMDgC' ,
 };
 
-export class LoginPage extends BasePage {
+export default class LoginPage extends BasePage {
   constructor(page: Page) {
     super(page);
   }

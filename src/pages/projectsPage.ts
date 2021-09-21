@@ -1,7 +1,7 @@
 import { BasePage } from './basePage';
 import { projectName } from '../utils/faker/fakerUtils';
 import { expect, Page } from '@playwright/test';
-import { API } from '../utils/constants';
+import { PROJECT_API } from '../utils/constants';
 
 const locators = {
   newProjectButton: 'text=adding a project', //'.efuNYJ.sc-bdnxRM',
@@ -19,21 +19,21 @@ const locators = {
   project: "[data-name='project-name']",
 };
 
-export class ProjectsPage extends BasePage {
+export default class ProjectsPage extends BasePage {
   constructor(page: Page) {
     super(page);
   }
 
   createFirstProject = async () => {
     await this.validateProjectPage();
-    await this.navigateTo(`${API.PROJECT_API}`);
+    await this.navigateTo(`${PROJECT_API}`);
     await this.clickNewProject();
     await this.waitForProjectOverlay();
     await this.enterProjectDetails();
   };
 
   createNthProject = async () => {
-    await this.navigateTo(`${API.PROJECT_API}`);
+    await this.navigateTo(`${PROJECT_API}`);
     await this.clickAddProject();
     await this.waitForProjectOverlay();
     await this.enterProjectDetails();
@@ -83,7 +83,7 @@ export class ProjectsPage extends BasePage {
   };
 
   verifyNumberOfProjectsInProjectsPage = async (count: any) => {
-    await this.navigateTo(`${API.PROJECT_API}`);
+    await this.navigateTo(`${PROJECT_API}`);
     await this.waitForElement(locators.projectTile);
     expect(await this.page.locator(locators.projectTile).count()).toBe(count);
   };
