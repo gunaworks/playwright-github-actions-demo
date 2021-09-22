@@ -100,7 +100,7 @@ export default class ProjectsPage extends BasePage {
   selectProject = async () => {
     try {
       await this.validateNonEmptyProjectPage();
-        await this.reloadPage();
+      await this.reloadPage();
       await this.waitForElement(locators.project);
       await this.click(locators.project);
       logger.info('Selected the project from the projects page');
@@ -115,7 +115,9 @@ export default class ProjectsPage extends BasePage {
 
   verifyProjectLandingPage: () => Promise<void> = async () => {
     await this.waitForElement(locators.projectsLandingPage);
-    await expect(await this.page.locator(locators.projectsLandingPage)).not.toBeNull();
+    await expect(
+      await this.page.locator(locators.projectsLandingPage)
+    ).not.toBeNull();
   };
 
   verifyProjectTitle = async () => {

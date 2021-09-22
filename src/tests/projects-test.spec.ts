@@ -8,25 +8,57 @@ import { KeyType } from '../utils/constants';
 
 test.describe('Projects test - Create first empty project for the user', () => {
   test.beforeEach(async ({ loginPage }) => {
-    await loginPage.login();
+    await test.step('Login to the application', async () => {
+      await loginPage.login();
+    });
   });
   test('Test', async ({ projectsPage }) => {
-    await projectsPage.createFirstProject();
-    await projectsPage.verifyProjectLandingPage();
-    await projectsPage.verifyProjectTitle();
-    await projectsPage.verifyNumberOfProjectsInProjectsPage(1);
+    await test.step('Create first empty project for the user', async () => {
+      await projectsPage.createFirstProject();
+    });
+    await test.step('Verify the landing page of the project', async () => {
+      await projectsPage.verifyProjectLandingPage();
+    });
+    await test.step(
+      'Verify the title of the project after creation',
+      async () => {
+        await projectsPage.verifyProjectTitle();
+      }
+    );
+    await test.step(
+      'Verify the number of projects in the projects page',
+      async () => {
+        await projectsPage.verifyNumberOfProjectsInProjectsPage(1);
+      }
+    );
   });
 });
 
 test.describe('Projects test - Add nth project for the user', () => {
   test.beforeEach(async ({ loginPage }) => {
-    await loginPage.login();
-    await createProject();
+    await test.step('Login to the application', async () => {
+      await loginPage.login();
+    });
+    await test.step('Create first project for the user', async () => {
+      await createProject();
+    });
   });
   test('Add nth project', async ({ projectsPage }) => {
-    await projectsPage.createNthProject();
-    await projectsPage.verifyProjectTitle();
-    await projectsPage.verifyNumberOfProjectsInProjectsPage(2);
+    await test.step('Create nth project for the user', async () => {
+      await projectsPage.createNthProject();
+    });
+    await test.step(
+      'Verify the title of the project after creation',
+      async () => {
+        await projectsPage.verifyProjectTitle();
+      }
+    );
+    await test.step(
+      'Verify the number of projects in the projects page',
+      async () => {
+        await projectsPage.verifyNumberOfProjectsInProjectsPage(1);
+      }
+    );
   });
 });
 
@@ -34,15 +66,32 @@ test.describe(
   'Projects test - Add plain key in the project for the user',
   () => {
     test.beforeEach(async ({ loginPage }) => {
-      await loginPage.login();
-      await createProject();
+      await test.step('Login to the application', async () => {
+        await loginPage.login();
+      });
+      await test.step('Create first project for the user', async () => {
+        await createProject();
+      });
     });
     test('Add plain key to the project', async ({ keysPage, projectsPage }) => {
-      await projectsPage.selectProject();
-      await keysPage.addKey();
-      await keysPage.enterKeyDetails();
-      await keysPage.saveKey();
-      await keysPage.verifyKeyInProjectsPage();
+      await test.step('Select the project', async () => {
+        await projectsPage.selectProject();
+      });
+      await test.step('Click on add key button', async () => {
+        await keysPage.addKey();
+      });
+      await test.step('Enter details for the key', async () => {
+        await keysPage.enterKeyDetails();
+      });
+      await test.step('Create key using the save button', async () => {
+        await keysPage.saveKey();
+      });
+      await test.step(
+        "Verify the created key in the project's page",
+        async () => {
+          await keysPage.verifyKeyInProjectsPage();
+        }
+      );
     });
   }
 );
@@ -51,17 +100,32 @@ test.describe(
   'Keys test - Add translation for the plain key in the project for the user',
   () => {
     test.beforeEach(async ({ loginPage }) => {
-      await loginPage.login();
-      await createProject();
-      await createKey(KeyType.PLAIN_KEY);
+      await test.step('Login to the application', async () => {
+        await loginPage.login();
+      });
+      await test.step('Create first project for the user', async () => {
+        await createProject();
+      });
+      await test.step('Create a plain key for the project', async () => {
+        await createKey(KeyType.PLAIN_KEY);
+      });
     });
     test('Add translation to the plain key', async ({
       keysPage,
       projectsPage,
     }) => {
-      await projectsPage.selectProject();
-      await keysPage.addTranslation();
-      await keysPage.verifyCompletionOfKeyTranslation();
+      await test.step('Select the project', async () => {
+        await projectsPage.selectProject();
+      });
+      await test.step('Add translation for the key', async () => {
+        await keysPage.addTranslation();
+      });
+      await test.step(
+        'Verify the completion of translation for the key',
+        async () => {
+          await keysPage.verifyCompletionOfKeyTranslation();
+        }
+      );
     });
   }
 );
@@ -70,21 +134,38 @@ test.describe(
   'Keys test - Add translation for the plural key in the project for the user',
   () => {
     test.beforeEach(async ({ loginPage }) => {
-      await loginPage.login();
-      await createProject();
-      await createKey(KeyType.PLURAL_KEY);
+      await test.step('Login to the application', async () => {
+        await loginPage.login();
+      });
+      await test.step('Create first project for the user', async () => {
+        await createProject();
+      });
+      await test.step('Create a plural key for the project', async () => {
+        await createKey(KeyType.PLURAL_KEY);
+      });
     });
     test('Add translation to the plural key', async ({
       keysPage,
       projectsPage,
     }) => {
-      await projectsPage.selectProject();
-      await keysPage.addTranslation();
-      await keysPage.verifyCompletionOfKeyTranslation();
+      await test.step('Select the project', async () => {
+        await projectsPage.selectProject();
+      });
+      await test.step('Add translation for the key', async () => {
+        await keysPage.addTranslation();
+      });
+      await test.step(
+        'Verify the completion of translation for the key',
+        async () => {
+          await keysPage.verifyCompletionOfKeyTranslation();
+        }
+      );
     });
   }
 );
 
 test.afterEach(async () => {
-  await deleteProjects();
+  await test.step('Delete the projects for the user', async () => {
+    await deleteProjects();
+  });
 });
