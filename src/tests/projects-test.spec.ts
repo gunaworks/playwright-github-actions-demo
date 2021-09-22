@@ -56,7 +56,7 @@ test.describe('Projects test - Add nth project for the user', () => {
     await test.step(
       'Verify the number of projects in the projects page',
       async () => {
-        await projectsPage.verifyNumberOfProjectsInProjectsPage(1);
+        await projectsPage.verifyNumberOfProjectsInProjectsPage(2);
       }
     );
   });
