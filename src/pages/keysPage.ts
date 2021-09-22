@@ -86,11 +86,12 @@ export default class KeysPage extends BasePage {
       await this.waitForElement(locators.translations);
       const elements = await this.page.$$(locators.translations);
       for await (const element of elements) {
+        await element.waitForElementState("visible");
         await element.click();
         await this.waitForElement(locators.translationTextBox);
         await this.type(locators.translationTextBox, translation);
         await this.click(locators.saveTranslation);
-        await this.isEnabled(locators.translations);
+        await this.isVisible(locators.translations);
       }
       logger.info('Added translation for the created key');
     } catch (e) {

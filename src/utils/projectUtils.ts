@@ -16,6 +16,7 @@ export const deleteProjects = async () => {
           expect(response.status).toBe(200);
           expect(response.data.project_deleted).toBe(true);
         });
+      logger.info("Projects deleted");
     }
   } catch (e) {
     logger.error('Error while deleting the projects', e);
@@ -30,6 +31,7 @@ export const createProject = async () => {
       expect(response.status).toBe(200);
       expect(response.data.project_id).not.toBeNull();
     });
+    logger.info("Project created");
   } catch (e) {
     logger.error('Error while creating the project', e);
     throw e;
@@ -49,6 +51,7 @@ export const createKey = async (keyType: string) => {
         expect(response.status).toBe(200);
         expect(response.data.keys[0].key_id).not.toBeNull();
       });
+    logger.info("Key created");
   } catch (e) {
     logger.error('Error while creating the key', e);
     throw e;

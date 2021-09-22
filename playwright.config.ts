@@ -8,6 +8,7 @@ const config: PlaywrightTestConfig = {
     viewport: { width: 1500, height: 730 },
     screenshot: 'only-on-failure',
   },
+  timeout: 60000,
   workers: 1,
   reporter: [['dot'], ['allure-playwright']],
   projects: [

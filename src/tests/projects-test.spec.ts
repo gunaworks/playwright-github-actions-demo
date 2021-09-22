@@ -23,7 +23,7 @@ test.describe('Projects test - Add nth project for the user', () => {
     await loginPage.login();
     await createProject();
   });
-  test.only('Add nth project', async ({ projectsPage }) => {
+  test('Add nth project', async ({ projectsPage }) => {
     await projectsPage.createNthProject();
     await projectsPage.verifyProjectTitle();
     await projectsPage.verifyNumberOfProjectsInProjectsPage(2);

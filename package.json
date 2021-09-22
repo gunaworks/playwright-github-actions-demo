@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "test": "npx playwright test",
+    "test-chrome": "npx playwright test --project=Chrome",
+    "test-firefox": "npx playwright test --project=Firefox",
     "pretty-code": "npx prettier --write .",
     "report": "allure generate --clean && allure serve",
     "record": "npx playwright codegen",

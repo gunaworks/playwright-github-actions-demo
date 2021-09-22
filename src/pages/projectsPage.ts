@@ -10,11 +10,12 @@ const locators = {
   addProjectOverlay: 'div#addproject .modal-content',
   projectName: 'input#project-name',
   createProject: 'a#project-add',
-  projectsLandingPage: 'div.sc-jJMGnK',
+  projectsLandingPage: 'div#noresults',
   addKeysSection: '.fSCyFf.sc-carFqZ > div:nth-of-type(3)',
   addKeyButton: '.sc-bdnxRM.add-key-trigger',
   keyEditorOverlay: 'div#addkey  .modal-content',
-  userLandingPage: '.sc-dlMDgC', //'.jfZxKp.sc-bdnxRM',
+  emptyProjectPage: '.sc-dlMDgC', //'.jfZxKp.sc-bdnxRM',
+  nonEmptyProjectPage: 'div.thewrap', //'.jfZxKp.sc-bdnxRM',
   projectTitle: 'a.project-title-wrapper',
   projectTile: "//div[@data-rbd-droppable-id='droppable']/div[*]",
   project: "[data-name='project-name']",
@@ -26,23 +27,34 @@ export default class ProjectsPage extends BasePage {
   }
 
   createFirstProject = async () => {
-    await this.validateProjectPage();
-    await this.navigateTo(`${PROJECT_API}`);
+    await this.validateEmptyProjectPage();
+    await this.reloadPage();
     await this.clickNewProject();
     await this.waitForProjectOverlay();
     await this.enterProjectDetails();
   };
 
   createNthProject = async () => {
-    await this.navigateTo(`${PROJECT_API}`);
+    await this.validateNonEmptyProjectPage();
+    await this.reloadPage();
     await this.clickAddProject();
     await this.waitForProjectOverlay();
     await this.enterProjectDetails();
   };
-  private validateProjectPage = async () => {
+  private validateEmptyProjectPage = async () => {
     try {
-      await this.waitForElement(locators.userLandingPage);
-      logger.info('Navigated to projects page');
+      await this.waitForElement(locators.emptyProjectPage);
+      logger.info('Navigated to empty projects page');
+    } catch (e) {
+      logger.error('Error while landing to projects page', e);
+      throw e;
+    }
+  };
+
+  private validateNonEmptyProjectPage = async () => {
+    try {
+      await this.waitForElement(locators.nonEmptyProjectPage);
+      logger.info('Navigated to empty projects page');
     } catch (e) {
       logger.error('Error while landing to projects page', e);
       throw e;
@@ -78,7 +90,7 @@ export default class ProjectsPage extends BasePage {
       await this.type(locators.projectName, projectName);
       await this.waitForElement(locators.createProject);
       await this.click(locators.createProject);
-      logger.info('Entered details for creating the project');
+      logger.info('Project created after entering the details');
     } catch (e) {
       logger.error('Error while entering the project details', e);
       throw e;
@@ -87,7 +99,8 @@ export default class ProjectsPage extends BasePage {
 
   selectProject = async () => {
     try {
-      await this.reloadPage();
+      await this.validateNonEmptyProjectPage();
+        await this.reloadPage();
       await this.waitForElement(locators.project);
       await this.click(locators.project);
       logger.info('Selected the project from the projects page');
@@ -102,9 +115,7 @@ export default class ProjectsPage extends BasePage {
 
   verifyProjectLandingPage: () => Promise<void> = async () => {
     await this.waitForElement(locators.projectsLandingPage);
-    await expect(
-      await this.page.locator(locators.projectsLandingPage)
-    ).toBeVisible();
+    await expect(await this.page.locator(locators.projectsLandingPage)).not.toBeNull();
   };
 
   verifyProjectTitle = async () => {

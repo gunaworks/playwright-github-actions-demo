@@ -37,10 +37,8 @@ export class BasePage {
     await this.page.reload();
   };
 
-  isEnabled = async (selector: string) => {
-    await this.page.isEnabled(selector);
+  isVisible = async (selector: string) => {
     await this.page.isVisible(selector);
-    await this.page.isEditable(selector, { strict: false });
   };
 
   urlContainsText = async (link: string) => {
