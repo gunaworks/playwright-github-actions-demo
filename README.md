@@ -48,7 +48,7 @@ Remember to change the `export` above to `SET` if you're running a Windows machi
 
 ```sh
 # Get into the directory
-$ cd lokalise
+$ cd Lokalise-Automation
 ```
 
 Install `YARN` using `npm install --global yarn`
