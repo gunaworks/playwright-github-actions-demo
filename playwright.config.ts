@@ -3,7 +3,7 @@ import { devices } from 'playwright';
 const config: PlaywrightTestConfig = {
   use: {
     baseURL: process.env.BASE_URL,
-    headless: true,
+    headless: (process.env.HEADLESS == "true"),
     ignoreHTTPSErrors: true,
     viewport: { width: 1500, height: 730 },
     screenshot: 'only-on-failure',
