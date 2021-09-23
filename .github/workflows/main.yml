@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       browser:
-        description: 'BROWSER'     
+        description: 'BROWSER'
         required: true
         default: 'Chrome'
 

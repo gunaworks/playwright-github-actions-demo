@@ -1,7 +1,7 @@
 import { BasePage } from './basePage';
 import { keyName, translation } from '../utils/faker/fakerUtils';
 import { expect, Page } from '@playwright/test';
-import { HUNDRED_PERCENTAGE, PROJECT_API } from '../utils/constants';
+import { HUNDRED_PERCENTAGE, ONE, PROJECT_API } from '../utils/constants';
 import { logger } from '../utils/logger';
 
 const locators = {
@@ -20,6 +20,7 @@ const locators = {
   translationTextBox: "div[role='presentation'] > pre[role='presentation']",
   saveTranslation: '.save > img',
   translationCompletion: '.eFuLkI.sc-fbIWvP',
+  keyCount: '.illmTA:nth-of-type(4) .sc-fbIWvP',
 };
 
 export default class KeysPage extends BasePage {
@@ -27,41 +28,20 @@ export default class KeysPage extends BasePage {
     super(page);
   }
 
-  addKey = async () => {
+  addPlainKey = async () => {
     try {
       await this.waitForElement(locators.addKeyButton);
       await this.click(locators.addKeyButton);
       await this.waitForElement(locators.addKeyOverlay);
-      logger.info('Clicked on add key button');
-    } catch (e) {
-      logger.error('Error while clicking on add key button', e);
-      throw e;
-    }
-  };
-
-  enterKeyDetails = async () => {
-    try {
       await this.type(locators.keyNameField, keyName);
       await this.click(locators.platforms);
       await this.waitForElement(locators.availableListOfPlatforms);
       await this.click(locators.firstAvailablePlatform);
-      logger.info('Entered details for the key');
-    } catch (e) {
-      logger.error('Error while entering the details for the key', e);
-      throw e;
-    }
-  };
-
-  saveKey = async () => {
-    try {
       await this.click(locators.saveKey);
       await this.waitForElement(locators.keySection);
-      logger.info('Save the key with the entered details');
+      logger.info('Created key successfully');
     } catch (e) {
-      logger.error(
-        'Error while saving the key after the details are entered',
-        e
-      );
+      logger.error('Error while creating the key', e);
       throw e;
     }
   };
@@ -69,6 +49,8 @@ export default class KeysPage extends BasePage {
   verifyKeyInProjectsPage = async () => {
     try {
       await this.navigateTo(`${PROJECT_API}`);
+      expect(this.page.locator(locators.keyCount)).not.toBeNull();
+      expect(await this.getText(locators.keyCount)).toBe(ONE.toString());
       logger.info('Key creation verified in the projects page');
     } catch (e) {
       logger.error(
@@ -90,8 +72,9 @@ export default class KeysPage extends BasePage {
         await element.click();
         await this.waitForElement(locators.translationTextBox);
         await this.type(locators.translationTextBox, translation);
+        await this.waitForElement(locators.saveTranslation);
         await this.click(locators.saveTranslation);
-        await this.isVisible(locators.translations);
+        await this.waitForElement(locators.translations);
       }
       logger.info('Added translation for the created key');
     } catch (e) {
@@ -102,7 +85,7 @@ export default class KeysPage extends BasePage {
 
   async verifyCompletionOfKeyTranslation() {
     try {
-      await this.navigateTo(`${PROJECT_API}`);
+      await this.navigateTo(PROJECT_API);
       await this.reloadPage();
       await this.waitForElement(locators.translationCompletion);
       expect(await this.getText(locators.translationCompletion)).toContain(

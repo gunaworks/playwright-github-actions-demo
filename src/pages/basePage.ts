@@ -6,7 +6,7 @@ export class BasePage {
     this.page = page;
   }
 
-  navigateTo = async (url: string) => {
+  protected navigateTo = async (url: string) => {
     await this.page.goto(url);
   };
 
@@ -14,26 +14,27 @@ export class BasePage {
     await this.page.click(selector);
   };
 
-  type = async (selector: string, keys: any) => {
+  protected type = async (selector: string, keys: any) => {
     await this.page.type(selector, keys);
   };
 
-  waitForUrl = async (url: string | RegExp | ((url: URL) => boolean)) =>
-    expect(await this.page.waitForURL(url));
+  protected waitForUrl = async (
+    url: string | RegExp | ((url: URL) => boolean)
+  ) => expect(await this.page.waitForURL(url));
 
-  waitForElement = async (selector: string) => {
+  protected waitForElement = async (selector: string) => {
     await this.page.waitForSelector(selector);
   };
 
-  getText = async (selector: string) => {
+  protected getText = async (selector: string) => {
     return await this.page.innerText(selector);
   };
 
-  reloadPage = async () => {
+  protected reloadPage = async () => {
     await this.page.reload();
   };
 
-  isVisible = async (selector: string) => {
+  protected isVisible = async (selector: string) => {
     await this.page.isVisible(selector);
   };
 }

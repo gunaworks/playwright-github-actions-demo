@@ -149,6 +149,7 @@ Screenshots and videos are captured when there is a test failure. The screenshot
 - [x] Encapsulation layers like test data, logic and actions on pages
 - [x] Ability to run tests in different browsers
 - [x] Ability to run tests in different environments
+- [x] Stability of the tests
 
 ### Nice to have
 

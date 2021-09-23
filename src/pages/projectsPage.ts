@@ -11,14 +11,12 @@ const locators = {
   projectName: 'input#project-name',
   createProject: 'a#project-add',
   projectsLandingPage: 'div#noresults',
-  addKeysSection: '.fSCyFf.sc-carFqZ > div:nth-of-type(3)',
-  addKeyButton: '.sc-bdnxRM.add-key-trigger',
-  keyEditorOverlay: 'div#addkey  .modal-content',
   emptyProjectPage: '.sc-dlMDgC',
   nonEmptyProjectPage: 'div.thewrap',
   projectTitle: 'a.project-title-wrapper',
   projectTile: "//div[@data-rbd-droppable-id='droppable']/div[*]",
   project: "[data-name='project-name']",
+  projectHeader: 'div.project-header-multi',
 };
 
 export default class ProjectsPage extends BasePage {
@@ -31,7 +29,7 @@ export default class ProjectsPage extends BasePage {
     await this.reloadPage();
     await this.clickNewProject();
     await this.waitForProjectOverlay();
-    await this.enterProjectDetails();
+    await this.enterDetailsAndCreateProject();
   };
 
   createNthProject = async () => {
@@ -39,7 +37,7 @@ export default class ProjectsPage extends BasePage {
     await this.reloadPage();
     await this.clickAddProject();
     await this.waitForProjectOverlay();
-    await this.enterProjectDetails();
+    await this.enterDetailsAndCreateProject();
   };
   private validateEmptyProjectPage = async () => {
     try {
@@ -85,7 +83,7 @@ export default class ProjectsPage extends BasePage {
     await this.waitForElement(locators.addProjectOverlay);
   };
 
-  private enterProjectDetails = async () => {
+  private enterDetailsAndCreateProject = async () => {
     try {
       await this.type(locators.projectName, projectName);
       await this.waitForElement(locators.createProject);
@@ -103,6 +101,7 @@ export default class ProjectsPage extends BasePage {
       await this.reloadPage();
       await this.waitForElement(locators.project);
       await this.click(locators.project);
+      await this.waitForElement(locators.projectHeader);
       logger.info('Selected the project from the projects page');
     } catch (e) {
       logger.error(

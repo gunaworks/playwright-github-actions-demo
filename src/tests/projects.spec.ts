@@ -6,13 +6,13 @@ import {
 } from '../utils/projectUtils';
 import { KeyType, ONE, TWO } from '../utils/constants';
 
-test.describe('Projects test - Create first empty project for the user', () => {
+test.describe('Projects test - Add first project for the user', () => {
   test.beforeEach(async ({ loginPage }) => {
     await test.step('Login to the application', async () => {
       await loginPage.login();
     });
   });
-  test('Test', async ({ projectsPage }) => {
+  test('Add first project for the user', async ({ projectsPage }) => {
     await test.step('Create first empty project for the user', async () => {
       await projectsPage.createFirstProject();
     });
@@ -43,7 +43,7 @@ test.describe('Projects test - Add nth project for the user', () => {
       await createProject();
     });
   });
-  test('Add nth project', async ({ projectsPage }) => {
+  test('Add nth project for the user', async ({ projectsPage }) => {
     await test.step('Create nth project for the user', async () => {
       await projectsPage.createNthProject();
     });
@@ -77,14 +77,8 @@ test.describe(
       await test.step('Select the project', async () => {
         await projectsPage.selectProject();
       });
-      await test.step('Click on add key button', async () => {
-        await keysPage.addKey();
-      });
-      await test.step('Enter details for the key', async () => {
-        await keysPage.enterKeyDetails();
-      });
-      await test.step('Create key using the save button', async () => {
-        await keysPage.saveKey();
+      await test.step('Create a plain key for the project', async () => {
+        await keysPage.addPlainKey();
       });
       await test.step(
         "Verify the created key in the project's page",
@@ -117,7 +111,7 @@ test.describe(
       await test.step('Select the project', async () => {
         await projectsPage.selectProject();
       });
-      await test.step('Add translation for the key', async () => {
+      await test.step('Add translation for the created key', async () => {
         await keysPage.addTranslation();
       });
       await test.step(
@@ -151,7 +145,7 @@ test.describe(
       await test.step('Select the project', async () => {
         await projectsPage.selectProject();
       });
-      await test.step('Add translation for the key', async () => {
+      await test.step('Add translation for the created key', async () => {
         await keysPage.addTranslation();
       });
       await test.step(
