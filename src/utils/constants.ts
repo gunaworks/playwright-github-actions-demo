@@ -5,3 +5,4 @@ export const KeyType = {
 
 export const PROJECT_API = 'projects';
 export const KEY_API = 'keys';
+export const API_VERSION='api2';

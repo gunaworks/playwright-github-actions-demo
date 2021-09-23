@@ -18,12 +18,10 @@ export default class LoginPage extends BasePage {
   login = async () => {
     try {
       await this.navigateTo('/login');
-      // await this.type(locators.emailAddress, process.env.EMAIL);
-      await this.type(locators.emailAddress, 'franco@fra.org');
-      // await this.type(locators.password, process.env.PASSWORD);
-      await this.type(locators.password, 'Abcd1234');
+      await this.type(locators.emailAddress, process.env.EMAIL);
+      await this.type(locators.password, process.env.PASSWORD);
       await this.click(locators.loginButton);
-      logger.info('User logged in successfully!');
+      logger.info('User logged in');
     } catch (e) {
       logger.error(
         'Error while logging into the application with the credentials',

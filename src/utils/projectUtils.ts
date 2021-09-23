@@ -16,8 +16,8 @@ export const deleteProjects = async () => {
           expect(response.status).toBe(200);
           expect(response.data.project_deleted).toBe(true);
         });
-      logger.info('Projects deleted');
     }
+      logger.info('Projects deleted');
   } catch (e) {
     logger.error('Error while deleting the projects', e);
     throw e;
