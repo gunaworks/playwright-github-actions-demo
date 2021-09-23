@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/playwright:bionic
 WORKDIR /app
-COPY package.json ./
+COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
 COPY ./run-tests.sh ./

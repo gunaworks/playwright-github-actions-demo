@@ -1,9 +1,11 @@
 import { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from 'playwright';
+import { PROTOCOL, DOMAIN } from './src/utils/constants';
+
 const config: PlaywrightTestConfig = {
   use: {
-    baseURL: process.env.BASE_URL,
-    headless: (process.env.HEADLESS == "true"),
+    baseURL: getBaseURLForEnvironment(process.env.ENVIRONMENT),
+    headless: process.env.HEADLESS == 'true',
     ignoreHTTPSErrors: true,
     viewport: { width: 1500, height: 730 },
     screenshot: 'only-on-failure',
@@ -28,4 +30,13 @@ const config: PlaywrightTestConfig = {
     },
   ],
 };
+
+function getBaseURLForEnvironment(environment: any) {
+  switch (environment) {
+    case 'STAGE':
+      return PROTOCOL + `://stage` + DOMAIN;
+    default:
+      throw new Error('Environment not available or not configured');
+  }
+}
 export default config;

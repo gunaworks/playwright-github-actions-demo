@@ -1,9 +1,19 @@
 import axios from 'axios';
-import {API_VERSION} from "../constants";
+import { API_VERSION, DOMAIN, PROTOCOL } from '../constants';
+import { logger } from '../logger';
 
 export default axios.create({
   headers: {
     'x-api-token': process.env.X_API_TOKEN,
   },
-  baseURL: process.env.BASE_URL+API_VERSION
+  baseURL: getBaseAPIForEnvironment(process.env.ENVIRONMENT),
 });
+
+function getBaseAPIForEnvironment(environment: any) {
+  switch (environment) {
+    case 'STAGE':
+      return PROTOCOL + `://stage` + DOMAIN + API_VERSION;
+    default:
+      throw new Error('Environment not available or not configured');
+  }
+}
