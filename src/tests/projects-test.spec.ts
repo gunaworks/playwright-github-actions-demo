@@ -4,7 +4,7 @@ import {
   createProject,
   deleteProjects,
 } from '../utils/projectUtils';
-import { KeyType } from '../utils/constants';
+import { KeyType, ONE, TWO } from '../utils/constants';
 
 test.describe('Projects test - Create first empty project for the user', () => {
   test.beforeEach(async ({ loginPage }) => {
@@ -28,7 +28,7 @@ test.describe('Projects test - Create first empty project for the user', () => {
     await test.step(
       'Verify the number of projects in the projects page',
       async () => {
-        await projectsPage.verifyNumberOfProjectsInProjectsPage(1);
+        await projectsPage.verifyNumberOfProjectsInProjectsPage(ONE);
       }
     );
   });
@@ -56,7 +56,7 @@ test.describe('Projects test - Add nth project for the user', () => {
     await test.step(
       'Verify the number of projects in the projects page',
       async () => {
-        await projectsPage.verifyNumberOfProjectsInProjectsPage(2);
+        await projectsPage.verifyNumberOfProjectsInProjectsPage(TWO);
       }
     );
   });

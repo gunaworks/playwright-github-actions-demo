@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { API_VERSION, DOMAIN, PROTOCOL } from '../constants';
-import { logger } from '../logger';
 
 export default axios.create({
   headers: {

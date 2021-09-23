@@ -1,6 +1,6 @@
 import { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from 'playwright';
-import { PROTOCOL, DOMAIN } from './src/utils/constants';
+import { DOMAIN, PROTOCOL } from './src/utils/constants';
 
 const config: PlaywrightTestConfig = {
   use: {
@@ -9,6 +9,7 @@ const config: PlaywrightTestConfig = {
     ignoreHTTPSErrors: true,
     viewport: { width: 1500, height: 730 },
     screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
   },
   timeout: 60000,
   workers: 1,

@@ -1,7 +1,7 @@
 import { BasePage } from './basePage';
 import { keyName, translation } from '../utils/faker/fakerUtils';
 import { expect, Page } from '@playwright/test';
-import { PROJECT_API } from '../utils/constants';
+import { HUNDRED_PERCENTAGE, PROJECT_API } from '../utils/constants';
 import { logger } from '../utils/logger';
 
 const locators = {
@@ -106,7 +106,7 @@ export default class KeysPage extends BasePage {
       await this.reloadPage();
       await this.waitForElement(locators.translationCompletion);
       expect(await this.getText(locators.translationCompletion)).toContain(
-        '100'
+        HUNDRED_PERCENTAGE
       );
       logger.info(
         'Verified the completion of key translation in the projects page'

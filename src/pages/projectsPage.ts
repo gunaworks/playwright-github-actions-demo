@@ -5,7 +5,7 @@ import { PROJECT_API } from '../utils/constants';
 import { logger } from '../utils/logger';
 
 const locators = {
-  newProjectButton: 'text=adding a project', //'.efuNYJ.sc-bdnxRM',
+  newProjectButton: 'text=adding a project',
   addProjectButton: "[data-name='add-project']",
   addProjectOverlay: 'div#addproject .modal-content',
   projectName: 'input#project-name',
@@ -14,8 +14,8 @@ const locators = {
   addKeysSection: '.fSCyFf.sc-carFqZ > div:nth-of-type(3)',
   addKeyButton: '.sc-bdnxRM.add-key-trigger',
   keyEditorOverlay: 'div#addkey  .modal-content',
-  emptyProjectPage: '.sc-dlMDgC', //'.jfZxKp.sc-bdnxRM',
-  nonEmptyProjectPage: 'div.thewrap', //'.jfZxKp.sc-bdnxRM',
+  emptyProjectPage: '.sc-dlMDgC',
+  nonEmptyProjectPage: 'div.thewrap',
   projectTitle: 'a.project-title-wrapper',
   projectTile: "//div[@data-rbd-droppable-id='droppable']/div[*]",
   project: "[data-name='project-name']",
@@ -130,7 +130,7 @@ export default class ProjectsPage extends BasePage {
   };
 
   verifyNumberOfProjectsInProjectsPage = async (count: any) => {
-    await this.navigateTo(`${PROJECT_API}`);
+    await this.navigateTo(PROJECT_API);
     await this.waitForElement(locators.projectTile);
     expect(await this.page.locator(locators.projectTile).count()).toBe(count);
   };

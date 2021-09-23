@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import axios from './axios/config';
 import { createProjectRequest } from './data/projectTestData';
 import { createKeyRequest } from './data/keyTestData';
-import { PROJECT_API, KEY_API } from './constants';
+import { KEY_API, PROJECT_API } from './constants';
 import { logger } from './logger';
 
 export const deleteProjects = async () => {

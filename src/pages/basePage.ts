@@ -25,10 +25,6 @@ export class BasePage {
     await this.page.waitForSelector(selector);
   };
 
-  locateElement = async (selector: string) => {
-    return this.page.locator(selector);
-  };
-
   getText = async (selector: string) => {
     return await this.page.innerText(selector);
   };
@@ -39,9 +35,5 @@ export class BasePage {
 
   isVisible = async (selector: string) => {
     await this.page.isVisible(selector);
-  };
-
-  urlContainsText = async (link: string) => {
-    expect(this.page.url().includes(link)).toBeTruthy();
   };
 }
