@@ -7,7 +7,6 @@ const locators = {
   emailAddress: 'div:nth-of-type(1) > .jKLUHq.sc-gXfVKN',
   password: 'div:nth-of-type(2) > .jKLUHq.sc-gXfVKN',
   loginButton: '.gCUvUk.sc-hiKfDv',
-  userLandingPage: '.sc-dlMDgC',
 };
 
 export default class LoginPage extends BasePage {

@@ -11,7 +11,7 @@ const locators = {
   projectName: 'input#project-name',
   createProject: 'a#project-add',
   projectsLandingPage: 'div#noresults',
-  emptyProjectPage: '.sc-dlMDgC',
+  emptyProjectPage: '.sc-fKgJPI',
   nonEmptyProjectPage: 'div.thewrap',
   projectTitle: 'a.project-title-wrapper',
   projectTile: "//div[@data-rbd-droppable-id='droppable']/div[*]",
