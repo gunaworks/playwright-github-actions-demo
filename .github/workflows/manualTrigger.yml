@@ -1,7 +1,11 @@
-name: Trigger E2E tests on push
+name: Trigger E2E tests on demand
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'BROWSER'
+        required: true
+        default: 'Chrome'
 
 jobs:
   e2e-tests:
@@ -13,4 +17,4 @@ jobs:
       - name: Build docker container
         run: docker build . -t e2e:v1
       - name: Run tests in docker container
-        run: docker run -e BROWSER=Chrome e2e:v1
+        run: docker run -e BROWSER=${{ github.event.inputs.browser }} e2e:v1
