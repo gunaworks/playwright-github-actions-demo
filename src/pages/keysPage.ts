@@ -83,7 +83,7 @@ export default class KeysPage extends BasePage {
     }
   };
 
-  async verifyCompletionOfKeyTranslation() {
+  verifyCompletionOfKeyTranslation = async () => {
     try {
       await this.navigateTo(PROJECT_API);
       await this.reloadPage();
@@ -101,5 +101,5 @@ export default class KeysPage extends BasePage {
       );
       throw e;
     }
-  }
+  };
 }

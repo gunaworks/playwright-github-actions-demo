@@ -130,11 +130,15 @@ The logger type is FileAppender, this covers the entire lifecycle of test execut
 
 ### CI/CD
 
-`GitHub Actions` is used as the CI/CD tool to execute the tests in docker containers. The pipeline will be triggered for every push made to the repo and also manually by the user. The tests are executed in docker containers on `CHROME` browser.
+`GitHub Actions` is the CI/CD tool to execute the tests in docker containers. The pipeline will be triggered for every push made to the repo and also manually by the user. The tests are executed in docker containers on `CHROME` browser.
 
-<img width="1050" alt="Screenshot 2021-09-23 at 7 51 23 PM" src="https://user-images.githubusercontent.com/25933070/134524796-1f559452-0a9a-478e-96a8-6e92802283e4.png">
+<img width="1313" alt="Screenshot 2021-09-24 at 10 20 36 AM" src="https://user-images.githubusercontent.com/25933070/134620013-a942f270-f1be-412b-8848-8c2b8b85b353.png">
 
-<img width="1767" alt="Screenshot 2021-09-23 at 7 33 24 PM" src="https://user-images.githubusercontent.com/25933070/134521691-edf26a72-605b-4d53-95a4-5ffa228b11dd.png">
+<img width="1230" alt="Screenshot 2021-09-24 at 10 21 49 AM" src="https://user-images.githubusercontent.com/25933070/134620071-4a1197b5-eda1-4d1d-801a-24af1efc6f75.png">
+
+The tests can be triggered on demand using `Trigger E2E tests on demand` workflow. We can select the browser of our choice as shown in the screenshot below.
+
+<img width="345" alt="Screenshot 2021-09-24 at 10 24 05 AM" src="https://user-images.githubusercontent.com/25933070/134620297-ee1665d8-54b3-4404-9b99-3b5cf1a6f675.png">
 
 ### Screenshots and videos
 
