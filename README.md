@@ -51,7 +51,7 @@ Remember to change the `export` above to `SET` if you're running a Windows machi
 $ cd Lokalise-Automation
 ```
 
-Install `YARN` using `npm install --global yarn`. To run tests in HEADFUL mode, please set `HEADLESS=false`.
+Install `YARN` using `npm install --global yarn`. To run tests in HEADFUL mode, please set `export HEADLESS=false`.
 
 ```sh
 # Execute tests in CHROME browser
