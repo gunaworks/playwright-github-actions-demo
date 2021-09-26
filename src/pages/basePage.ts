@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 
 export class BasePage {
   readonly page: Page;
@@ -17,10 +17,6 @@ export class BasePage {
   protected type = async (selector: string, keys: any) => {
     await this.page.type(selector, keys);
   };
-
-  protected waitForUrl = async (
-    url: string | RegExp | ((url: URL) => boolean)
-  ) => expect(await this.page.waitForURL(url));
 
   protected waitForElement = async (selector: string) => {
     await this.page.waitForSelector(selector);
