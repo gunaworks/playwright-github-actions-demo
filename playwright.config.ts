@@ -32,7 +32,7 @@ const config: PlaywrightTestConfig = {
   ],
 };
 
-function getBaseURLForEnvironment(environment: any) {
+function getBaseURLForEnvironment(environment: unknown) {
   switch (environment) {
     case 'STAGE':
       return PROTOCOL + `://stage` + DOMAIN;

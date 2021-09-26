@@ -1,9 +1,10 @@
 import { BasePage } from './basePage';
-import { projectName } from '../utils/faker/fakerUtils';
 import { expect, Page } from '@playwright/test';
 import { PROJECT_API } from '../utils/constants';
 import { logger } from '../utils/logger';
 
+const faker = require('faker');
+const projectName = 'Project ' + faker.name.firstName();
 const locators = {
   newProjectButton: 'text=adding a project',
   addProjectButton: "[data-name='add-project']",
@@ -128,7 +129,7 @@ export default class ProjectsPage extends BasePage {
     expect(textContent).toContain(projectName);
   };
 
-  verifyNumberOfProjectsInProjectsPage = async (count: any) => {
+  verifyNumberOfProjectsInProjectsPage = async (count: unknown) => {
     await this.navigateTo(PROJECT_API);
     await this.waitForElement(locators.projectTile);
     expect(await this.page.locator(locators.projectTile).count()).toBe(count);

@@ -8,7 +8,7 @@ export default axios.create({
   baseURL: getBaseAPIForEnvironment(process.env.ENVIRONMENT),
 });
 
-function getBaseAPIForEnvironment(environment: any) {
+function getBaseAPIForEnvironment(environment: unknown) {
   switch (environment) {
     case 'STAGE':
       return PROTOCOL + `://stage` + DOMAIN + API_VERSION;

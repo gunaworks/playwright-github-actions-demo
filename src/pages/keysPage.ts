@@ -1,9 +1,9 @@
 import { BasePage } from './basePage';
-import { keyName, translation } from '../utils/faker/fakerUtils';
 import { expect, Page } from '@playwright/test';
 import { HUNDRED_PERCENTAGE, ONE, PROJECT_API } from '../utils/constants';
 import { logger } from '../utils/logger';
 
+const faker = require('faker');
 const locators = {
   addKeyButton: '.sc-bdnxRM.add-key-trigger',
   addKeyOverlay: 'div#addkey .modal-body',
@@ -30,6 +30,8 @@ export default class KeysPage extends BasePage {
 
   addPlainKey = async () => {
     try {
+      const keyName = faker.name.lastName();
+
       await this.waitForElement(locators.addKeyButton);
       await this.click(locators.addKeyButton);
       await this.waitForElement(locators.addKeyOverlay);
@@ -63,6 +65,8 @@ export default class KeysPage extends BasePage {
 
   addTranslation = async () => {
     try {
+      const translation = faker.name.firstName();
+
       await this.waitForElement(locators.key);
       await this.waitForDomLoadState(locators.translations);
       const elements = await this.page.$$(locators.translations);

@@ -1,7 +1,9 @@
-import { keyName } from '../faker/fakerUtils';
 import { KeyType, PLATFORM } from '../constants';
 
+const faker = require('faker');
+
 export function createKeyRequest(keyType: string) {
+  const keyName = faker.name.lastName();
   const baseRequestBody = {
     key_name: keyName,
     platforms: [platform()],

@@ -1,6 +1,6 @@
 # Lokalise Test Automation task
 
-In this project, the test automation framework is created using Playwright and Typescript. The tests can be executed locally and also in docker containers.
+In this project, the automation framework is created using Playwright and Typescript. The tests can be executed locally and also in docker containers.
 
 _The task is to automate the following scenarios_ -
 
@@ -51,7 +51,7 @@ Remember to change the `export` above to `SET` if you're running a Windows machi
 $ cd Lokalise-Automation
 ```
 
-Install `YARN` using `npm install --global yarn`
+Install `YARN` using `npm install --global yarn`. To run tests in HEADFUL mode, please set `export HEADLESS=false`.
 
 ```sh
 # Execute tests in CHROME browser

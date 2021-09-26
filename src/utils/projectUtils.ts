@@ -8,8 +8,8 @@ import { logger } from './logger';
 export const deleteProjects = async () => {
   try {
     const projects = await getProjects();
-    for (let i = 0; i < projects.length; i++) {
-      const projectId = projects[i].project_id;
+    for (const project of projects) {
+      const projectId = project.project_id;
       await axios
         .delete(`${PROJECT_API}/${projectId}`)
         .then(function (response) {
