@@ -6,7 +6,7 @@ import { logger } from '../utils/logger';
 
 const locators = {
   addKeyButton: '.sc-bdnxRM.add-key-trigger',
-  addKeyOverlay: 'div#addkey  .modal-content',
+  addKeyOverlay: 'div#addkey .modal-body',
   keyNameField: 'input#keyName',
   platforms: "//input[@id='s2id_autogen8']",
   availableListOfPlatforms: "[id='select2-drop']",
@@ -16,7 +16,7 @@ const locators = {
   keySection: '.row.row-key',
   translations: '.highlight',
   key: '.current',
-  translationsSection: '.clearfix',
+  translationsSection: '.row-trans',
   translationTextBox: "div[role='presentation'] > pre[role='presentation']",
   saveTranslation: '.save > img',
   translationCompletion: '.eFuLkI.sc-fbIWvP',
@@ -64,17 +64,16 @@ export default class KeysPage extends BasePage {
   addTranslation = async () => {
     try {
       await this.waitForElement(locators.key);
-      await this.waitForElement(locators.translationsSection);
-      await this.waitForElement(locators.translations);
+      await this.waitForDomLoadState(locators.translations);
       const elements = await this.page.$$(locators.translations);
       for await (const element of elements) {
         await element.waitForElementState('visible');
         await element.click();
-        await this.waitForElement(locators.translationTextBox);
+        await this.waitForDomLoadState(locators.translationTextBox);
         await this.type(locators.translationTextBox, translation);
         await this.waitForElement(locators.saveTranslation);
         await this.click(locators.saveTranslation);
-        await this.waitForElement(locators.translations);
+        await this.waitForDomLoadState(locators.translations);
       }
       logger.info('Added translation for the created key');
     } catch (e) {

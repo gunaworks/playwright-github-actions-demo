@@ -26,6 +26,10 @@ export class BasePage {
     await this.page.waitForSelector(selector);
   };
 
+  protected waitForDomLoadState = async (selector: string) => {
+    await this.page.waitForLoadState('domcontentloaded');
+  };
+
   protected getText = async (selector: string) => {
     return await this.page.innerText(selector);
   };
