@@ -85,7 +85,7 @@ export X_API_TOKEN=<api-token>
 export EMAIL=<email>
 export PASSWORD=<password>
 export ENVIRONMENT=<environment> [STAGE, QA, DEV]
-export HEADLESS=<true or false>
+export HEADLESS=<true> [XVFB support is not added]
 ```
 
 Execute the below commands -
