@@ -23,9 +23,9 @@ _The task is to automate the following scenarios_ -
 - [Prettier] - a code formatter to make the code look neat and clean
 - [eslint] - static code analyzer to identify problematic code
 
-### Structure of the framework
+<!-- ### Structure of the framework
 
-<img width="437" alt="Screenshot 2021-09-23 at 7 43 31 PM" src="https://user-images.githubusercontent.com/25933070/134523462-41eb7cf2-4848-4b3f-92f1-c03c89da82fd.png">
+<img width="437" alt="Screenshot 2021-09-23 at 7 43 31 PM" src="https://user-images.githubusercontent.com/25933070/134523462-41eb7cf2-4848-4b3f-92f1-c03c89da82fd.png"> -->
 
 ### How to run the tests?
 
@@ -48,7 +48,7 @@ Remember to change the `export` above to `SET` if you're running a Windows machi
 
 ```sh
 # Get into the directory
-$ cd Lokalise-Automation
+$ cd automation
 ```
 
 Install `YARN` using `npm install --global yarn`. To run tests in HEADFUL mode, please set `export HEADLESS=false`.
