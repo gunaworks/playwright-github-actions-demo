@@ -1,4 +1,4 @@
-# Test Automation with Playwright
+# Test Automation with Playwright & Typescript
 
 In this project, the automation framework is created using Playwright and Typescript. The tests can be executed locally and also in docker containers.
 
